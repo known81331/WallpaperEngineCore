@@ -105,6 +105,7 @@
 		18ED16F02E82463800EF1EE5 /* steam_appid.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16EF2E82463800EF1EE5 /* steam_appid.txt */; };
 		18ED16F82E82D7BF00EF1EE5 /* pakFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18ED16F62E82D7BF00EF1EE5 /* pakFile.cpp */; };
 		18ED16FA2E82DA8400EF1EE5 /* scene.pkg in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16F92E82DA8300EF1EE5 /* scene.pkg */; };
+		18ED16FD2E82E59500EF1EE5 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16FC2E82E59500EF1EE5 /* .gitkeep */; };
 		18F3A35E2E82428A002BF418 /* libsteam_api.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F3A35D2E82428A002BF418 /* libsteam_api.dylib */; };
 		18F3A3E32E8242E7002BF418 /* steam_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F3A3A92E8242E7002BF418 /* steam_api.json */; };
 		18F3A3E42E8242E7002BF418 /* libsdkencryptedappticket.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F3A3C82E8242E7002BF418 /* libsdkencryptedappticket.dylib */; };
@@ -223,6 +224,7 @@
 		18ED16EF2E82463800EF1EE5 /* steam_appid.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = steam_appid.txt; sourceTree = "<group>"; };
 		18ED16F62E82D7BF00EF1EE5 /* pakFile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pakFile.cpp; sourceTree = "<group>"; };
 		18ED16F92E82DA8300EF1EE5 /* scene.pkg */ = {isa = PBXFileReference; lastKnownFileType = file; path = scene.pkg; sourceTree = "<group>"; };
+		18ED16FC2E82E59500EF1EE5 /* .gitkeep */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		18F3A35D2E82428A002BF418 /* libsteam_api.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libsteam_api.dylib; sourceTree = "<group>"; };
 		18F3A3A82E8242E7002BF418 /* steam_api_flat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = steam_api_flat.h; sourceTree = "<group>"; };
 		18F3A3A92E8242E7002BF418 /* steam_api.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = steam_api.json; sourceTree = "<group>"; };
@@ -458,6 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				18F3A3A62E8242E7002BF418 /* public */,
+				18ED16FC2E82E59500EF1EE5 /* .gitkeep */,
 			);
 			path = steamsdk;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				18BBE2392E7E302B0037D79F /* tmp_scene in Resources */,
 				188E4B3F2E62A73800DDF480 /* assets in Resources */,
 				18050BF32E6B1FB900E21E9B /* genericimage.shader in Resources */,
+				18ED16FD2E82E59500EF1EE5 /* .gitkeep in Resources */,
 				18E1075A2E610487003CEAD2 /* tahoe.tex in Resources */,
 				18ED16FA2E82DA8400EF1EE5 /* scene.pkg in Resources */,
 				188E4B952E63C47D00DDF480 /* cn.ttf in Resources */,
@@ -866,7 +870,7 @@
 					/usr/local/Cellar/freeimage/3.18.0/include,
 					/usr/local/Cellar/assimp/6.0.2/include,
 				);
-				INFOPLIST_FILE = "-7-textured-Info.plist";
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -925,7 +929,7 @@
 					/usr/local/Cellar/freeimage/3.18.0/include,
 					/usr/local/Cellar/assimp/6.0.2/include,
 				);
-				INFOPLIST_FILE = "-7-textured-Info.plist";
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
