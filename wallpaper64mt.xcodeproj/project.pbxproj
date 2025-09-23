@@ -42,7 +42,6 @@
 		180A71A22E7F206A00A135EC /* simdjson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107522E60FF1F003CEAD2 /* simdjson.cpp */; };
 		180A71A32E7F207000A135EC /* touch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 180A71662E7F1DE700A135EC /* touch.mm */; };
 		180A71A42E7F207000A135EC /* 07-texturing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 180A716A2E7F1F8700A135EC /* 07-texturing.cpp */; };
-		180A71A52E7F207A00A135EC /* tahoe_management.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 180A71682E7F1E0E00A135EC /* tahoe_management.cpp */; };
 		180A71A62E7F213600A135EC /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107192E60FA3A003CEAD2 /* imgui_draw.cpp */; };
 		180A71A72E7F213600A135EC /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1070E2E60FA3A003CEAD2 /* imgui_widgets.cpp */; };
 		180A71A82E7F213600A135EC /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E107102E60FA3A003CEAD2 /* imgui_impl_metal.mm */; };
@@ -349,13 +348,12 @@
 		18E107082E60FA3A003CEAD2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				180A71682E7F1E0E00A135EC /* tahoe_management.cpp */,
 				18E1070A2E60FA3A003CEAD2 /* gui */,
 				18E1074B2E60FD74003CEAD2 /* usercode */,
 				18E1071A2E60FA3A003CEAD2 /* netgame4mt */,
 				180A71652E7F1D8900A135EC /* target_ios */,
-				18E107302E60FA3A003CEAD2 /* main.cpp */,
-				180A71682E7F1E0E00A135EC /* tahoe_management.cpp */,
-				18E107092E60FA3A003CEAD2 /* apphide.mm */,
+				18ED16FB2E82E28B00EF1EE5 /* target_osx */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -445,6 +443,15 @@
 				188E4B3E2E62A73800DDF480 /* assets */,
 			);
 			path = res;
+			sourceTree = "<group>";
+		};
+		18ED16FB2E82E28B00EF1EE5 /* target_osx */ = {
+			isa = PBXGroup;
+			children = (
+				18E107302E60FA3A003CEAD2 /* main.cpp */,
+				18E107092E60FA3A003CEAD2 /* apphide.mm */,
+			);
+			path = target_osx;
 			sourceTree = "<group>";
 		};
 		18F3A3A52E8242E7002BF418 /* steamsdk */ = {
@@ -700,7 +707,6 @@
 				180A719C2E7F206600A135EC /* wallpaper64.cpp in Sources */,
 				180A71A32E7F207000A135EC /* touch.mm in Sources */,
 				180A71912E7F206000A135EC /* mtl_shadercompiler.cpp in Sources */,
-				180A71A52E7F207A00A135EC /* tahoe_management.cpp in Sources */,
 				180A71AA2E7F213600A135EC /* imgui_tables.cpp in Sources */,
 				180A71972E7F206000A135EC /* MeshResource.cpp in Sources */,
 				180A71982E7F206000A135EC /* mtl_resourcestate.cpp in Sources */,

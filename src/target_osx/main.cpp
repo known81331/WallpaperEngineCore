@@ -1,12 +1,12 @@
-#include "netgame4mt/RenderEngine.hpp"
-#include "netgame4mt/NetGameWorkspace.hpp"
+#include "../netgame4mt/RenderEngine.hpp"
+#include "../netgame4mt/NetGameWorkspace.hpp"
 
 #define GLFW_INCLUDE_NONE
 #define GLFW_EXPOSE_NATIVE_COCOA
-#include <glfw/glfw3.h>
-#include <glfw/glfw3native.h>
+#include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 
-#include "gui/imgui_impl_glfw.h"
+#include "../gui/imgui_impl_glfw.h"
 
 GLFWwindow* window = nullptr;
 
