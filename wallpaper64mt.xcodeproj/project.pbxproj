@@ -36,7 +36,6 @@
 		180A719D2E7F206600A135EC /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1090A2E610EC4003CEAD2 /* scene.cpp */; };
 		180A719E2E7F206600A135EC /* sceneParticle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188E4B3C2E6276E500DDF480 /* sceneParticle.cpp */; };
 		180A719F2E7F206600A135EC /* pakImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1074C2E60FEF1003CEAD2 /* pakImage.cpp */; };
-		180A71A02E7F206600A135EC /* w64steamui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188E4B862E62C62700DDF480 /* w64steamui.cpp */; };
 		180A71A12E7F206A00A135EC /* lz4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1074F2E60FF1F003CEAD2 /* lz4.cpp */; };
 		180A71A22E7F206A00A135EC /* simdjson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107522E60FF1F003CEAD2 /* simdjson.cpp */; };
 		180A71A32E7F207000A135EC /* touch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 180A71662E7F1DE700A135EC /* touch.mm */; };
@@ -71,6 +70,8 @@
 		18CB0D7A2E83AC4C00BB1E76 /* Helvetica.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */; };
 		18CB0D7C2E83B95200BB1E76 /* sceneVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */; };
 		18CB0D7D2E83B95200BB1E76 /* sceneVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */; };
+		18CB0D7F2E83BD6B00BB1E76 /* w64nosteamui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */; };
+		18CB0D802E83BDB400BB1E76 /* tahoe_management.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 180A71682E7F1E0E00A135EC /* tahoe_management.cpp */; };
 		18E107312E60FA3A003CEAD2 /* apphide.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E107092E60FA3A003CEAD2 /* apphide.mm */; };
 		18E107322E60FA3A003CEAD2 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1070E2E60FA3A003CEAD2 /* imgui_widgets.cpp */; };
 		18E107332E60FA3A003CEAD2 /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E107102E60FA3A003CEAD2 /* imgui_impl_metal.mm */; };
@@ -174,6 +175,7 @@
 		18AD2D112E20DC8D00174B2A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Helvetica.ttc; sourceTree = "<group>"; };
 		18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sceneVideo.cpp; sourceTree = "<group>"; };
+		18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = w64nosteamui.cpp; sourceTree = "<group>"; };
 		18E107052E60FA15003CEAD2 /* wallpaper64.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallpaper64.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E107092E60FA3A003CEAD2 /* apphide.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = apphide.mm; sourceTree = "<group>"; };
 		18E1070B2E60FA3A003CEAD2 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
@@ -417,6 +419,7 @@
 				18E1074E2E60FF1F003CEAD2 /* deps */,
 				18E1074C2E60FEF1003CEAD2 /* pakImage.cpp */,
 				18ED16F62E82D7BF00EF1EE5 /* pakFile.cpp */,
+				18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */,
 				188E4B862E62C62700DDF480 /* w64steamui.cpp */,
 				18E107562E610257003CEAD2 /* wallpaper64.cpp */,
 				18E107552E60FF4D003CEAD2 /* wallpaper64.h */,
@@ -691,11 +694,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180A71A02E7F206600A135EC /* w64steamui.cpp in Sources */,
 				180A718F2E7F206000A135EC /* NetGameWorkspaceMisc.cpp in Sources */,
 				180A71A62E7F213600A135EC /* imgui_draw.cpp in Sources */,
 				180A71A92E7F213600A135EC /* imgui_demo.cpp in Sources */,
 				18CB0D7D2E83B95200BB1E76 /* sceneVideo.cpp in Sources */,
+				18CB0D7F2E83BD6B00BB1E76 /* w64nosteamui.cpp in Sources */,
 				180A71902E7F206000A135EC /* Camera.cpp in Sources */,
 				180A71A22E7F206A00A135EC /* simdjson.cpp in Sources */,
 				180A718B2E7F203900A135EC /* genericimage.shader in Sources */,
@@ -709,6 +712,7 @@
 				180A71A12E7F206A00A135EC /* lz4.cpp in Sources */,
 				180A719E2E7F206600A135EC /* sceneParticle.cpp in Sources */,
 				180A719F2E7F206600A135EC /* pakImage.cpp in Sources */,
+				18CB0D802E83BDB400BB1E76 /* tahoe_management.cpp in Sources */,
 				180A719C2E7F206600A135EC /* wallpaper64.cpp in Sources */,
 				180A71A32E7F207000A135EC /* touch.mm in Sources */,
 				180A71912E7F206000A135EC /* mtl_shadercompiler.cpp in Sources */,
