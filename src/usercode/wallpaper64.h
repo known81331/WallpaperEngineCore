@@ -88,4 +88,6 @@ inline std::string Wallpaper64GetStorageDir() {
     return std::string(getenv("HOME")) + "/.wallpaperio/";
 }
 
+void Wallpaper64_Load(const std::string& path);
+
 #endif /* wallpaper64_h */

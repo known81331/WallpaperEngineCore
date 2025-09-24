@@ -9,6 +9,7 @@
 #include "wallpaper64.h"
 #include "scene.hpp"
 #include "steam_api.h"
+#include "TextureLoader.hpp"
 
 int _steamStatus = 0;
 bool _gSteamInit = false;
@@ -17,11 +18,27 @@ bool _gSteamQueryComplete = false;
 struct SteamUIQuery_t {
     EUGCQuery queryType;
     int page = 1;
+    char search[1024];
 } _steamUIQuery;
+
+struct SteamUIDownloaded_t {
+    uint64 sizeOnDisk = 0;
+    char folderPath[1024];
+    uint32 timestamp = 0;
+    PublishedFileId_t id;
+};
+
+struct SteamUIState_t {
+    int page = 0;
+    int downloading = 0;
+    int iconsize = 192;
+} _steamUIState;
 
 std::vector<SteamUGCDetails_t> details;
 std::unordered_map<uint64_t, MTLTexture> details_previews;
 
+std::unordered_map<uint64_t, bool> downloadingItems;
+std::unordered_map<uint64_t, SteamUIDownloaded_t> downloadedItems;
 
 void SteamUI_DownloadThumb(UGCHandle_t handle) ;
 
@@ -45,6 +62,8 @@ public:
         SteamUGC()->ReleaseQueryUGCRequest(pCallback->m_handle);
         _gSteamQueryComplete = true;
         
+        
+       // delete this;
     }
 
     
@@ -53,7 +72,7 @@ public:
             printf("failed!\n");
             return;
         }
-        puts("ugc read!!");
+        
         char *buffer = (char*)malloc(pCallback->m_nSizeInBytes);
         int32 bytesRead = SteamRemoteStorage()->UGCRead(
             pCallback->m_hFile,
@@ -74,18 +93,57 @@ public:
         FreeImage_Unload(bmp2);
         FreeImage_CloseMemory(stream);
         free(buffer);
+     
+      //  delete this;
     }
     
-    void SteamUI_OnItemDownloadComplete(RemoteStorageDownloadUGCResult_t *pCallback, bool bIOFailure) {
-        
-    }
-
     
     CCallResult<CSteamUI_Handler, RemoteStorageDownloadUGCResult_t> _callResult;
     CCallResult<CSteamUI_Handler, SteamUGCQueryCompleted_t> _callResult2;
+    
 };
 
-std::vector<CSteamUI_Handler*> uiHandler_alivePool;
+std::vector<CSteamUI_Handler*> _handlergcList;
+
+class CSteamUI_Static_Handler {
+private:
+    STEAM_CALLBACK( CSteamUI_Static_Handler, SteamUI_OnItemDownloadComplete, DownloadItemResult_t );
+} _gStaticSteamUIHandler;
+
+void CSteamUI_Static_Handler::SteamUI_OnItemDownloadComplete(DownloadItemResult_t *pCallback) {
+    
+    if (pCallback->m_eResult != k_EResultOK) {
+        printf("failed!\n");
+        return;
+    }
+    if (pCallback->m_unAppID != 431960)
+        return;
+    
+    puts("workshop item downloaded");
+    
+    _steamUIState.downloading = 0;
+    
+    SteamUIDownloaded_t details;
+
+    bool ok = SteamUGC()->GetItemInstallInfo(
+        pCallback->m_nPublishedFileId, // Workshop file ID
+        &details.sizeOnDisk,
+        details.folderPath,
+        sizeof(details.folderPath),
+        &details.timestamp
+    );
+
+    details.id = pCallback->m_nPublishedFileId;
+    
+    if (ok) {
+        printf("Item installed at: %s (size: %llu bytes)\n", details.folderPath, details.sizeOnDisk);
+        downloadingItems[pCallback->m_nPublishedFileId] = false;
+        downloadedItems[pCallback->m_nPublishedFileId]  = details;
+    } else {
+        printf("Failed to get item install info\n");
+    }
+    
+}
 
 void SteamUI_Init() {
     _steamStatus = !SteamAPI_Init();
@@ -101,58 +159,89 @@ void SteamUI_Init() {
     _gSteamInit = true;
 }
 
-void SteamUI_DrawCell(SteamUGCDetails_t& detail) {
-    ImGui::BeginChild((uint64_t)&detail, ImVec2(256,256));
-    if (details_previews[detail.m_hPreviewFile]._pTexture) {
-        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0,0));
-        ImGui::ImageButton(detail.m_rgchTitle, (ImTextureID)details_previews[detail.m_hPreviewFile]._pTexture, ImVec2(256,256), ImVec2(0, 1), ImVec2(1,0));
-        ImGui::PopStyleVar();
-        
-        ImVec2 cursorPos = ImGui::GetCursorPos();
-        ImGui::SetCursorPos(ImVec2(128-ImGui::CalcTextSize(detail.m_rgchTitle).x/2,cursorPos.y-50));
-        ImGui::Text(detail.m_rgchTitle);
-    }
-    ImGui::EndChild();
-}
-
 
 void SteamUI_DownloadThumb(UGCHandle_t handle) {
     CSteamUI_Handler* _steamUIHandler = new CSteamUI_Handler();
 
     SteamAPICall_t apiCall = SteamRemoteStorage()->UGCDownload(handle, 0);
     _steamUIHandler->_callResult.Set(apiCall, _steamUIHandler, &CSteamUI_Handler::SteamUI_OnThumbDownloadComplete);
-
-    // store pointer in pool to keep alive
-    uiHandler_alivePool.push_back(_steamUIHandler);
+    _handlergcList.push_back(_steamUIHandler);
 }
 
-void SteamUI_RefreshWorkshopList(EUGCQuery ranking = k_EUGCQuery_RankedByTrend, int page = 1, bool clean = true) {
+void SteamUI_DownloadItem(PublishedFileId_t id) {
+    if (downloadedItems[id].id || downloadingItems[id])
+        return;
+    
+    SteamUGC()->SubscribeItem(id);
+    bool success = SteamUGC()->DownloadItem(id, true);
+    if (success) {
+        downloadingItems[id] = true;
+        _steamUIState.downloading = 1;
+    }
+}
+
+
+void SteamUI_DrawCell(SteamUGCDetails_t& detail) {
+    ImGui::BeginChild((uint64_t)&detail, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize));
+    if (details_previews[detail.m_hPreviewFile]._pTexture) {
+        ImColor col(255,255,255);
+        if ( downloadingItems[detail.m_nPublishedFileId] || downloadedItems[detail.m_nPublishedFileId].id )
+            col = ImColor(120,120,120);
+            
+            
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0,0));
+        if ( ImGui::ImageButton(detail.m_rgchTitle, (ImTextureID)details_previews[detail.m_hPreviewFile]._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0, 1), ImVec2(1,0), col, ImColor(120,120,120) ) ) {
+            SteamUI_DownloadItem(detail.m_nPublishedFileId);
+        }
+        ImGui::PopStyleVar();
+        
+        ImVec2 cursorPos = ImGui::GetCursorPos();
+        
+        ImGui::SetCursorPos(ImVec2(0,cursorPos.y/2));
+        ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[1]);
+        if (downloadingItems[detail.m_nPublishedFileId]) {
+            ImGui::TextColored(ImColor(0.5f, 0.5f, 1.f), "DOWNLOADING");
+        }
+        ImGui::PopFont();
+        
+        ImGui::SetCursorPos(ImVec2((_steamUIState.iconsize/2)-ImGui::CalcTextSize(detail.m_rgchTitle).x/2,cursorPos.y-50));
+        ImGui::Text(detail.m_rgchTitle);
+    }
+    ImGui::EndChild();
+}
+
+
+void SteamUI_RefreshWorkshopList(EUGCQuery ranking = k_EUGCQuery_RankedByTrend, int page = 1,  char const *searchValue = nullptr, bool clean = true) {
     _gSteamQueryComplete = false;
     
     if (clean) {
-        details.clear();
+        details = {};
         for (auto& i : details_previews)
             i.second.destroy();
         details_previews = {};
         
-        for (auto* handler : uiHandler_alivePool) {
-            delete handler;
+        for (auto* i : _handlergcList) {
+            i->_callResult.Cancel();
+            i->_callResult2.Cancel();
+            delete i;
         }
-        uiHandler_alivePool.clear();
+        _handlergcList = {};
     }
     
     static UGCQueryHandle_t queryHandle;
     
     if (!_gSteamQueryComplete) {
         queryHandle = SteamUGC()->CreateQueryAllUGCRequest(ranking, k_EUGCMatchingUGCType_Items, 431960, 431960, page);
+        if (searchValue)
+            SteamUGC()->SetSearchText(queryHandle, searchValue);
+        
         auto apiCall = SteamUGC()->SendQueryUGCRequest(queryHandle);
         bool bFailed = false;
         
         CSteamUI_Handler* _steamUIHandler = new CSteamUI_Handler();
         
         _steamUIHandler->_callResult2.Set(apiCall, _steamUIHandler, &CSteamUI_Handler::SteamUI_OnWorkshopListQueryComplete);
-        uiHandler_alivePool.push_back(_steamUIHandler);
-        
+        _handlergcList.push_back(_steamUIHandler);
     }
     
 }
@@ -161,74 +250,220 @@ void SteamUI_RefreshWorkshopList(EUGCQuery ranking = k_EUGCQuery_RankedByTrend, 
 bool tahoe_button_factory(const char* text, ImVec2 size, int glass_index = 0, ImVec2 modifier = {0,0} ) ;
 
 void SteamUI_WorkshopList() {
-    if (_steamStatus == 1) {
-        ImGui::Text("Steam is not available at this time.");
-        return;
-    }
-    else if (_steamStatus == 2) {
-        ImGui::Text("Ongoing connectivity issue detected.");
-    }
-    else
-        ImGui::Text("Steam is online!");
-   
     if (_gSteamQueryComplete) {
-        
-        ImGui::Begin("Navigator", 0, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
-        ImGui::SetNextItemAllowOverlap();
-        if (tahoe_button_factory("prev", ImVec2(80,80), 0))
-            SteamUI_RefreshWorkshopList(k_EUGCQuery_RankedByLastUpdatedDate, --_steamUIQuery.page);
-        ImGui::SameLine();
-        ImGui::SetNextItemAllowOverlap();
-        if (tahoe_button_factory("next", ImVec2(80,80), 1))
-            SteamUI_RefreshWorkshopList(k_EUGCQuery_RankedByLastUpdatedDate, ++_steamUIQuery.page);
-        ImGui::End();
         
         for (int i = 0 ; i < details_previews.size() ; i++) {
             ImGui::SetNextItemAllowOverlap();
             SteamUI_DrawCell(details[i]);
-            if ( (i+1) % ((int)ImGui::GetWindowWidth() / 256) )
+            if ( (i+1) % ((int)ImGui::GetWindowWidth() / _steamUIState.iconsize) )
                 ImGui::SameLine();
         }
             
     }
-    
-    if (details_previews.size() >= 50) {
-        for (auto* handler : uiHandler_alivePool) {
-            delete handler;
-        }
-        uiHandler_alivePool.clear();
-    }
+
 }
 
-void SteamUI_DownloadList() {
-    
-}
 
 extern Scene scene;
 
+void SteamUI_DrawCell_local(SteamUIDownloaded_t& detail) {
+    ImGui::BeginChild(detail.id, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize));
+    auto tex = TextureLoader::createUncompressedTexture((std::string(detail.folderPath) + "/preview.jpg"), 0);
+    if (!tex._pTexture)
+        tex = TextureLoader::createUncompressedTexture((std::string(detail.folderPath) + "/preview.gif"), 0);
+    if (tex._pTexture)
+    {
+        ImColor col(255,255,255);
+        
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0,0));
+        if ( ImGui::ImageButton(" ", (ImTextureID)tex._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0,0), ImVec2(1,1), col, ImColor(120,120,120) ) ) {
+            PAKFile_LoadAndDecompress( (std::string(detail.folderPath) + "/scene.pkg").data());
+            scene.destroy();
+            scene.init((Wallpaper64GetStorageDir() + "tmp_scene").data());
+        }
+        ImGui::PopStyleVar();
+        
+        ImVec2 cursorPos = ImGui::GetCursorPos();
+        
+        ImGui::SetCursorPos(ImVec2((_steamUIState.iconsize/2)-ImGui::CalcTextSize("99999999").x/2,cursorPos.y-50));
+        ImGui::Text("%lld", detail.id);
+    }
+    else
+        ImGui::Text("Item missing/corrupted!\n%d", detail.id);
+    ImGui::EndChild();
+}
+
+
+void SteamUI_PopulateLocalList() {
+    auto sz = SteamUGC()->GetNumSubscribedItems();
+    PublishedFileId_t pVecPublishedFileId[sz];
+    SteamUGC()->GetSubscribedItems(pVecPublishedFileId, sz);
+    
+    for (int i = 0; i < sz; i++) {
+        auto id = pVecPublishedFileId[i];
+        SteamUIDownloaded_t downloaded;
+        SteamUGC()->GetItemInstallInfo(id, &downloaded.sizeOnDisk, downloaded.folderPath, 1024, &downloaded.timestamp);
+        downloaded.id = id;
+     //   if (!std::filesystem::exists((std::string(downloaded.folderPath) + "/scene.pkg")))
+     //       break;
+        downloadedItems[id] = downloaded;
+    }
+    
+}
+
+
+void SteamUI_LocalList() {
+    int id = 0;
+    ImGui::Text("%d", SteamUGC()->GetNumSubscribedItems());
+    for (auto& i : downloadedItems) {
+        if (i.second.id == 0) continue;
+        
+        SteamUI_DrawCell_local(i.second);
+        
+        if ( (id+1) % ((int)ImGui::GetWindowWidth() / _steamUIState.iconsize) )
+            ImGui::SameLine();
+        id++;
+    }
+}
+
+void SteamUI_Hotbar() {
+    
+    static char const * items[] = {
+        "RankedByVote",
+        "RankedByPublicationDate",
+        "RankedByTrend",
+        "RankedByNumTimesReported",
+        "RankedByTotalVotesAsc",
+        "RankedByVotesUp",
+        "RankedByTotalUniqueSubscriptions",
+        "RankedByLastUpdatedDate",
+        "RankedByTextSearch",
+        "NotYetRated"
+    };
+    
+    static const char * current_item = items[0];
+    
+    if (ImGui::Button("o"))
+        SteamUI_RefreshWorkshopList(_steamUIQuery.queryType, _steamUIQuery.page, _steamUIQuery.search);
+    ImGui::SameLine();
+    
+    if (ImGui::Button("<"))
+        SteamUI_RefreshWorkshopList(_steamUIQuery.queryType, --_steamUIQuery.page, _steamUIQuery.search);
+    ImGui::SameLine();
+    
+    ImGui::SetNextItemWidth(40);
+    if ( ImGui::InputInt("##Page", &_steamUIQuery.page, 0) )
+        SteamUI_RefreshWorkshopList(_steamUIQuery.queryType, _steamUIQuery.page, _steamUIQuery.search);
+    ImGui::SameLine();
+
+
+    if (ImGui::Button(">"))
+        SteamUI_RefreshWorkshopList(_steamUIQuery.queryType, ++_steamUIQuery.page, _steamUIQuery.search);
+    ImGui::SameLine();
+    
+    
+    
+    ImGui::SetNextItemWidth(200);
+    if (ImGui::BeginCombo("##Sort order", current_item))
+    {
+        for (int n = 0; n < IM_ARRAYSIZE(items); n++)
+        {
+            bool is_selected = (current_item == items[n]);
+            if (ImGui::Selectable(items[n], is_selected))
+            {
+                current_item = items[n];
+                switch (n) {
+                    case 0: _steamUIQuery.queryType = k_EUGCQuery_RankedByVote; break;
+                    case 1: _steamUIQuery.queryType = k_EUGCQuery_RankedByPublicationDate; break;
+                    case 2: _steamUIQuery.queryType = k_EUGCQuery_RankedByTrend; break;
+                    case 3: _steamUIQuery.queryType = k_EUGCQuery_RankedByNumTimesReported; break;
+                    case 4: _steamUIQuery.queryType = k_EUGCQuery_RankedByTotalVotesAsc; break;
+                    case 5: _steamUIQuery.queryType = k_EUGCQuery_RankedByVotesUp; break;
+                    case 6: _steamUIQuery.queryType = k_EUGCQuery_RankedByTotalUniqueSubscriptions; break;
+                    case 7: _steamUIQuery.queryType = k_EUGCQuery_RankedByLastUpdatedDate; break;
+                    case 8: _steamUIQuery.queryType = k_EUGCQuery_RankedByTextSearch; break;
+                    case 9: _steamUIQuery.queryType = k_EUGCQuery_NotYetRated; break;
+                        
+                }
+                SteamUI_RefreshWorkshopList(_steamUIQuery.queryType, _steamUIQuery.page, _steamUIQuery.search);
+            }
+            if (is_selected)
+                ImGui::SetItemDefaultFocus();
+            
+        }
+        ImGui::EndCombo();
+    }
+    
+    ImGui::SameLine();
+
+    ImGui::SetNextItemWidth(200);
+    if ( ImGui::InputTextWithHint("##Search", "Search", _steamUIQuery.search, 512) ) {
+        SteamUI_RefreshWorkshopList(_steamUIQuery.queryType, _steamUIQuery.page, _steamUIQuery.search);
+    }
+    
+    ImGui::SameLine();
+    
+    if (ImGui::Button("Preview >>"))
+        ;
+    
+    ImGui::SameLine();
+    
+    if (ImGui::Button("Filter >>"))
+        ;
+    
+    
+    ImGui::SameLine();
+    ImGui::Text(  _steamUIState.downloading > 0 ? "Downloading ..." : " ");
+    //ImGui::SameLine();
+    
+    
+        
+}
+
+
+// note: this was rendered in a separate context in the opengl version, consider readding it here
+//  it is impossible to interact with things behind explorer/finder for win32/osx
 void Wallpaper64SteamUI() {
-    if (!_gSteamInit)
+    
+    if (!_gSteamInit) {
         SteamUI_Init();
+        SteamUI_PopulateLocalList();
+    }
     
     
     SteamAPI_RunCallbacks();
     
     ImGui::Begin("WallpaperUI", 0,  ImGuiWindowFlags_NoBringToFrontOnFocus);
     
-    if (ImGui::Button("unPAK")) {
-        PAKFile_LoadAndDecompress("scene.pkg");
-        scene.destroy();
-        scene.init((Wallpaper64GetStorageDir() + "tmp_scene").data());
+    if ( ImGui::Button("Local") )
+        _steamUIState.page = 0;
+    ImGui::SameLine();
+    if ( ImGui::Button("Workshop") )
+        _steamUIState.page = 1;
+    
+    ImGui::SameLine();
+    
+    if ( ImGui::Button("Unsubscribe all") ) {
+        for (auto& i : downloadedItems) {
+            SteamUGC()->UnsubscribeItem(i.first);
+        }
     }
     
-    if ( ImGui::Button("Rank by trend") )
-        SteamUI_RefreshWorkshopList();
-    ImGui::SameLine();
-    if ( ImGui::Button("Rank by date") )
-        SteamUI_RefreshWorkshopList(k_EUGCQuery_RankedByLastUpdatedDate);
+    SteamUI_Hotbar() ;
     
-    SteamUI_WorkshopList();
     
+    ImGui::BeginChild("List");
+    
+    switch (_steamUIState.page) {
+        case 0:
+            SteamUI_LocalList();
+            break;
+        case 1:
+            SteamUI_WorkshopList();
+            break;
+    }
+    
+    ImGui::EndChild();
 
     ImGui::End();
 }

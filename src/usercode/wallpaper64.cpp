@@ -16,12 +16,66 @@ std::string GetBundleFilePath(const std::string& filename);
 ImVec2 recurseModelPosition(Model* mdl) ;
 ImVec2 recurseModelScale(Model* mdl);
 
+#include<mach/mach.h>
+std::string MACH_ram_getvalue(){ //Note: this value is in KB!
+    char line[512];
+
+    struct task_basic_info t_info;
+    mach_msg_type_number_t t_info_count = TASK_BASIC_INFO_COUNT;
+
+    if (KERN_SUCCESS != task_info(mach_task_self(),
+                                  TASK_BASIC_INFO, (task_info_t)&t_info,
+                                  &t_info_count))
+    {
+        return "";
+    }
+    
+    sprintf(line, "used memory: %lld\n", t_info.resident_size);
+
+    return line;
+}
+
+void RamTile() {
+    ImGui::SameLine(ImGui::GetWindowWidth() - 350);
+    ImGui::MenuItem(MACH_ram_getvalue().data());
+}
+
+void HostTile() {
+    char hostname[512];
+    int result;
+    result = gethostname(hostname, 512);
+    ImGui::SameLine(ImGui::GetWindowWidth() - 410);
+    ImGui::MenuItem(hostname);
+    
+}
+
+void ClockTile() {
+    static bool date = false;
+    char ctm[128];
+    time_t now = time(0);
+    tm *ltm = localtime(&now);
+    ImGui::SameLine(ImGui::GetWindowWidth() - 150);
+    if (date)
+        sprintf(ctm, "%d/%d/%d", ltm->tm_mon+1, ltm->tm_mday, ltm->tm_year % 100);
+    else
+        sprintf(ctm, "% 2d%c%02d %cM", ltm->tm_hour % 12 + !(ltm->tm_hour % 12) * 12 , ltm->tm_sec % 2 ? ':' : ' ', ltm->tm_min, 'A' + ltm->tm_hour / 12 * 15);
+
+    if ( ImGui::MenuItem(ctm) )
+        date = !date;
+}
+
+void BuildTile() {
+    char* text = __TIME__ " " __DATE__ " (ngbuild)";
+    ImGui::SameLine(ImGui::GetWindowWidth() / 2 - ImGui::CalcTextSize(text).x / 2 );
+    ImGui::TextColored( ImVec4(0.5f, 0.5f, 0.5f, 1.f), "%s", text);
+}
+
 void NetGameTaskbar() {
     static std::unordered_map<ImGuiWindow*, bool> hidemap = {};
     ImGui::BeginMainMenuBar();
     auto *g = ImGui::GetCurrentContext();
     
-    if ( ImGui::BeginMenu("appHide") ) {
+    if ( ImGui::BeginMenu("@") ) {
         for (int i = g->WindowsFocusOrder.size() - 1; i >= 0; i--) {
             auto* hwnd = g->WindowsFocusOrder[i];
             if (ImGui::MenuItem(hwnd->Name)) {
@@ -38,6 +92,24 @@ void NetGameTaskbar() {
             hidemap[hwnd] = (strcmp(hwnd->Name, "WallpaperUI")) ? true : false;
         }
     }
+    
+    if ( ImGui::MenuItem("editor") ) {
+        for (int i = g->WindowsFocusOrder.size() - 1; i >= 0; i--) {
+            auto* hwnd = g->WindowsFocusOrder[i];
+            if ( !strcmp(hwnd->Name, "New WALLPAPER64") )
+                hidemap[hwnd] = false;
+        }
+    }
+    
+    if ( ImGui::MenuItem("apphide") ) {
+        
+    }
+    
+    RamTile();
+    HostTile();
+    ClockTile();
+    BuildTile();
+    
     ImGui::EndMainMenuBar();
     
     for (auto& hwnd : hidemap)
@@ -96,9 +168,6 @@ void NetGameImguiWindow() {
         style.ScrollbarRounding = 25;
         style.GrabRounding = 25;
     
-        
-       
-        scene.init( GetBundleFilePath("tmp_scene").data());
         init = true;
     }
     

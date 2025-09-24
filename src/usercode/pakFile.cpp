@@ -38,6 +38,8 @@ typedef struct
     uint32_t size;
 } file_t;
 
+std::vector<char*> readStrings = {};
+
 char *read_str()
 {
     uint32_t size;
@@ -45,6 +47,7 @@ char *read_str()
     char *buf = (char *)malloc(size+1);
     memset(buf, 0, size + 1);
     fread(buf, size, 1, file);
+    readStrings.push_back(buf);
     return buf;
 }
 
@@ -115,12 +118,15 @@ void _string_split(std::vector<std::string>& v, const std::string& target, char 
 
 int PAKFile_LoadAndDecompress(const char *filename)
 {
+    if (!std::filesystem::exists(filename))
+        return -1;
+    
     prepare_file(filename);
     file_t *files = read_files();
     vector<string> filename_v;
     _string_split(filename_v, filename, ".");
-    string tmppath = Wallpaper64GetStorageDir() + "tmp_";
-    tmppath += *filename_v.begin();
+    string tmppath = Wallpaper64GetStorageDir() + "tmp_scene";
+   // tmppath += *filename_v.begin();
     if(fs::is_directory(fs::path(tmppath)))
         fs::remove_all(fs::path(tmppath));
     fs::create_directories(fs::path(tmppath));
@@ -157,6 +163,11 @@ int PAKFile_LoadAndDecompress(const char *filename)
         free(buffer);
     }
     fclose(file);
+    
+    for (auto* p : readStrings) {
+        free(p);
+    }
+    readStrings.clear();
     
     return 0;
 }

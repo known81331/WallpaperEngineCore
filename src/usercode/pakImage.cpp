@@ -124,7 +124,7 @@ void PAKImage_Free(PAKImage& img) {
         delete[] img.mips[i].data;
       }
     }
-      delete img.mips;
+      delete[] img.mips;
   }
 }
 
@@ -151,6 +151,8 @@ void PAKImage_GLUpload_PNG(PAKImage& bzImage, MTLTexture& texture) {
     FreeImage_CloseMemory(data);
 }
 
+// you MUST be very careful with raw uploads, any non-freeimage format are considered raw and that includes video/sound files
+//   which are not yet parsed
 void PAKImage_GLUpload_RAW(PAKImage& bzImage, MTLTexture& texture) {
     texture.create(bzImage.texWidth, bzImage.texHeight, MTL::PixelFormatRGBA8Unorm, MTL::TextureType2D, MTL::StorageModeManaged, MTL::TextureUsageShaderRead);
     texture.upload(4, (uint8_t*)bzImage.mips[0].data);

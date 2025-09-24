@@ -27,15 +27,7 @@ int main( int argc, char* argv[] )
         return 0;
 
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    
-    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-
-    //glfwWindowHint( GLFW_MOUSE_PASSTHROUGH, GLFW_TRUE );
-   // glfwWindowHint( GLFW_DECORATED, GLFW_FALSE );
-   // glfwWindowHint( GLFW_FOCUS_ON_SHOW, GLFW_FALSE );
-
-    window = glfwCreateWindow(mode->width, mode->height, "wallpaper64", NULL, NULL);
+    window = glfwCreateWindow(1920, 1080, "wallpaper64", NULL, NULL);
     
     auto* _pDevice = MTL::CreateSystemDefaultDevice();
     apphide(window, (void*)_pDevice);
@@ -49,16 +41,12 @@ int main( int argc, char* argv[] )
     
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("cn.ttf").data(), 16.f, nullptr, ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
+    ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("helvetica.ttc").data(), 24.f, nullptr, ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
 
     void tahoe_create(MTL::Device*);
     tahoe_create(_pDevice);
     
-    CNetGame_Workspace workspace = {};
-    workspace.create();
-
     while (!glfwWindowShouldClose(window)) {
-        workspace.update();
-        
         void tahoe_update();
         tahoe_update();
         
