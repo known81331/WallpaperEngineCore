@@ -90,7 +90,7 @@ PAKImage PAKImage_Alloc(const std::string& imgPath) {
 
               mipEntry.data = new uint8_t[mipEntry.realSize];
 
-              const int result = LZ4_decompress_safe((char*)compressedData, (char*)mipEntry.data, mipEntry.compressedSize,
+              LZ4_decompress_safe((char*)compressedData, (char*)mipEntry.data, mipEntry.compressedSize,
                 mipEntry.realSize);
               
               delete[] compressedData;

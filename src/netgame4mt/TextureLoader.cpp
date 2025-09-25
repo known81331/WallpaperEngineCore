@@ -81,6 +81,7 @@ MTLTexture TextureLoader::createUncompressedTexture(const std::string &filePath,
 
         switch (bpp)
         {
+        case 4:
         case 8:
         case 16:
         case 24:

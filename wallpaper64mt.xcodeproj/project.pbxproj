@@ -17,7 +17,6 @@
 		180A71892E7F203100A135EC /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 188E4B3E2E62A73800DDF480 /* assets */; };
 		180A718A2E7F203900A135EC /* cn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188E4B942E63C47D00DDF480 /* cn.ttf */; };
 		180A718B2E7F203900A135EC /* genericimage.shader in Sources */ = {isa = PBXBuildFile; fileRef = 18050BF22E6B1FB900E21E9B /* genericimage.shader */; };
-		180A718C2E7F203900A135EC /* tahoe.tex in Resources */ = {isa = PBXBuildFile; fileRef = 18E107592E610487003CEAD2 /* tahoe.tex */; };
 		180A718E2E7F206000A135EC /* NetGameWorkspace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1071E2E60FA3A003CEAD2 /* NetGameWorkspace.cpp */; };
 		180A718F2E7F206000A135EC /* NetGameWorkspaceMisc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107282E60FA3A003CEAD2 /* NetGameWorkspaceMisc.cpp */; };
 		180A71902E7F206000A135EC /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1071F2E60FA3A003CEAD2 /* Camera.cpp */; };
@@ -40,12 +39,6 @@
 		180A71A22E7F206A00A135EC /* simdjson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107522E60FF1F003CEAD2 /* simdjson.cpp */; };
 		180A71A32E7F207000A135EC /* touch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 180A71662E7F1DE700A135EC /* touch.mm */; };
 		180A71A42E7F207000A135EC /* 07-texturing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 180A716A2E7F1F8700A135EC /* 07-texturing.cpp */; };
-		180A71A62E7F213600A135EC /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107192E60FA3A003CEAD2 /* imgui_draw.cpp */; };
-		180A71A72E7F213600A135EC /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1070E2E60FA3A003CEAD2 /* imgui_widgets.cpp */; };
-		180A71A82E7F213600A135EC /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E107102E60FA3A003CEAD2 /* imgui_impl_metal.mm */; };
-		180A71A92E7F213600A135EC /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107182E60FA3A003CEAD2 /* imgui_demo.cpp */; };
-		180A71AA2E7F213600A135EC /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107162E60FA3A003CEAD2 /* imgui_tables.cpp */; };
-		180A71AC2E7F213600A135EC /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107112E60FA3A003CEAD2 /* imgui.cpp */; };
 		180A71AF2E7F218800A135EC /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 180A71AD2E7F218800A135EC /* libassimp.a */; };
 		180A71B02E7F218800A135EC /* libFreeImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 180A71AE2E7F218800A135EC /* libFreeImage.a */; };
 		180A71B22E7F222500A135EC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180A71B12E7F222400A135EC /* UIKit.framework */; };
@@ -53,6 +46,8 @@
 		180A71B62E7F223400A135EC /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180A71B52E7F223300A135EC /* MetalKit.framework */; };
 		180A71B82E7F223C00A135EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180A71B72E7F223C00A135EC /* Foundation.framework */; };
 		180A71BA2E7F2DDA00A135EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 180A71B92E7F2DDA00A135EC /* LaunchScreen.storyboard */; };
+		183F52702E844A9C0050DE94 /* libsdkencryptedappticket.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18F3A3C82E8242E7002BF418 /* libsdkencryptedappticket.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		183F52712E844A9C0050DE94 /* libsteam_api.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18F3A35D2E82428A002BF418 /* libsteam_api.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		184D5B212E5BB79900072534 /* libfreeimage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 184D5B202E5BB78000072534 /* libfreeimage.a */; };
 		1877443F2E52A8A400D6193E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1819BC622E216CB800001758 /* Cocoa.framework */; platformFilters = (macos, ); };
 		187744402E52A8A400D6193E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18AD2D112E20DC8D00174B2A /* QuartzCore.framework */; };
@@ -66,6 +61,20 @@
 		188E4B852E62C22F00DDF480 /* libfreeimage.3.18.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 187760712E598B670066A9AA /* libfreeimage.3.18.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		188E4B872E62C62700DDF480 /* w64steamui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188E4B862E62C62700DDF480 /* w64steamui.cpp */; };
 		188E4B952E63C47D00DDF480 /* cn.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 188E4B942E63C47D00DDF480 /* cn.ttf */; };
+		18C885822E84B8DD00637DBE /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C885732E84B8DC00637DBE /* imgui_widgets.cpp */; };
+		18C885832E84B8DD00637DBE /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C885732E84B8DC00637DBE /* imgui_widgets.cpp */; };
+		18C885842E84B8DD00637DBE /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C885762E84B8DC00637DBE /* imgui_impl_glfw.cpp */; };
+		18C885852E84B8DD00637DBE /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C885762E84B8DC00637DBE /* imgui_impl_glfw.cpp */; };
+		18C885862E84B8DD00637DBE /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C885772E84B8DC00637DBE /* imgui_draw.cpp */; };
+		18C885872E84B8DD00637DBE /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C885772E84B8DC00637DBE /* imgui_draw.cpp */; };
+		18C885882E84B8DD00637DBE /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18C885782E84B8DC00637DBE /* imgui_impl_metal.mm */; };
+		18C885892E84B8DD00637DBE /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18C885782E84B8DC00637DBE /* imgui_impl_metal.mm */; };
+		18C8858A2E84B8DD00637DBE /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857A2E84B8DC00637DBE /* imgui.cpp */; };
+		18C8858B2E84B8DD00637DBE /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857A2E84B8DC00637DBE /* imgui.cpp */; };
+		18C8858C2E84B8DD00637DBE /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857D2E84B8DD00637DBE /* imgui_tables.cpp */; };
+		18C8858D2E84B8DD00637DBE /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857D2E84B8DD00637DBE /* imgui_tables.cpp */; };
+		18C8858E2E84B8DD00637DBE /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857F2E84B8DD00637DBE /* imgui_demo.cpp */; };
+		18C8858F2E84B8DD00637DBE /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857F2E84B8DD00637DBE /* imgui_demo.cpp */; };
 		18CB0D792E83AC4C00BB1E76 /* Helvetica.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */; };
 		18CB0D7A2E83AC4C00BB1E76 /* Helvetica.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */; };
 		18CB0D7C2E83B95200BB1E76 /* sceneVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */; };
@@ -73,13 +82,6 @@
 		18CB0D7F2E83BD6B00BB1E76 /* w64nosteamui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */; };
 		18CB0D802E83BDB400BB1E76 /* tahoe_management.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 180A71682E7F1E0E00A135EC /* tahoe_management.cpp */; };
 		18E107312E60FA3A003CEAD2 /* apphide.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E107092E60FA3A003CEAD2 /* apphide.mm */; };
-		18E107322E60FA3A003CEAD2 /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1070E2E60FA3A003CEAD2 /* imgui_widgets.cpp */; };
-		18E107332E60FA3A003CEAD2 /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E107102E60FA3A003CEAD2 /* imgui_impl_metal.mm */; };
-		18E107342E60FA3A003CEAD2 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107112E60FA3A003CEAD2 /* imgui.cpp */; };
-		18E107352E60FA3A003CEAD2 /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107162E60FA3A003CEAD2 /* imgui_tables.cpp */; };
-		18E107362E60FA3A003CEAD2 /* imgui_impl_glfw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107172E60FA3A003CEAD2 /* imgui_impl_glfw.cpp */; };
-		18E107372E60FA3A003CEAD2 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107182E60FA3A003CEAD2 /* imgui_demo.cpp */; };
-		18E107382E60FA3A003CEAD2 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107192E60FA3A003CEAD2 /* imgui_draw.cpp */; };
 		18E107392E60FA3A003CEAD2 /* IOSFileSystem.mm in Sources */ = {isa = PBXBuildFile; fileRef = 18E1071B2E60FA3A003CEAD2 /* IOSFileSystem.mm */; };
 		18E1073A2E60FA3A003CEAD2 /* RenderEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1071C2E60FA3A003CEAD2 /* RenderEngine.cpp */; };
 		18E1073B2E60FA3A003CEAD2 /* TextureLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1071D2E60FA3A003CEAD2 /* TextureLoader.cpp */; };
@@ -101,18 +103,13 @@
 		18E107532E60FF1F003CEAD2 /* lz4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1074F2E60FF1F003CEAD2 /* lz4.cpp */; };
 		18E107542E60FF1F003CEAD2 /* simdjson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107522E60FF1F003CEAD2 /* simdjson.cpp */; };
 		18E107572E610257003CEAD2 /* wallpaper64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107562E610257003CEAD2 /* wallpaper64.cpp */; };
-		18E1075A2E610487003CEAD2 /* tahoe.tex in Resources */ = {isa = PBXBuildFile; fileRef = 18E107592E610487003CEAD2 /* tahoe.tex */; };
 		18E1090C2E610EC4003CEAD2 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1090A2E610EC4003CEAD2 /* scene.cpp */; };
-		18ED16ED2E8244BB00EF1EE5 /* libsdkencryptedappticket.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18F3A3C82E8242E7002BF418 /* libsdkencryptedappticket.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		18ED16EE2E8244C000EF1EE5 /* libsteam_api.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18F3A35D2E82428A002BF418 /* libsteam_api.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		18ED16F02E82463800EF1EE5 /* steam_appid.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16EF2E82463800EF1EE5 /* steam_appid.txt */; };
 		18ED16F82E82D7BF00EF1EE5 /* pakFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18ED16F62E82D7BF00EF1EE5 /* pakFile.cpp */; };
 		18ED16FD2E82E59500EF1EE5 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16FC2E82E59500EF1EE5 /* .gitkeep */; };
 		18F3A35E2E82428A002BF418 /* libsteam_api.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F3A35D2E82428A002BF418 /* libsteam_api.dylib */; };
 		18F3A3E32E8242E7002BF418 /* steam_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F3A3A92E8242E7002BF418 /* steam_api.json */; };
 		18F3A3E42E8242E7002BF418 /* libsdkencryptedappticket.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F3A3C82E8242E7002BF418 /* libsdkencryptedappticket.dylib */; };
-		18F3A3ED2E82439E002BF418 /* libsteam_api.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 18F3A35D2E82428A002BF418 /* libsteam_api.dylib */; };
-		18F3A3EE2E8243A0002BF418 /* libsdkencryptedappticket.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 18F3A3C82E8242E7002BF418 /* libsdkencryptedappticket.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,9 +119,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				18F3A3EE2E8243A0002BF418 /* libsdkencryptedappticket.dylib in Embed Libraries */,
 				1804D4422E5BF408005714B1 /* libassimp.5.4.3.dylib in Embed Libraries */,
-				18F3A3ED2E82439E002BF418 /* libsteam_api.dylib in Embed Libraries */,
 				188E4B852E62C22F00DDF480 /* libfreeimage.3.18.0.dylib in Embed Libraries */,
 				18E1074A2E60FB78003CEAD2 /* libglfw.3.dylib in Embed Libraries */,
 				1804D4462E5CF39D005714B1 /* libfreeimage_arm64.dylib in Embed Libraries */,
@@ -132,14 +127,14 @@
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		18F3A3EF2E82448D002BF418 /* CopyFiles */ = {
+		18CB0D812E844A7100BB1E76 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				18ED16EE2E8244C000EF1EE5 /* libsteam_api.dylib in CopyFiles */,
-				18ED16ED2E8244BB00EF1EE5 /* libsdkencryptedappticket.dylib in CopyFiles */,
+				183F52702E844A9C0050DE94 /* libsdkencryptedappticket.dylib in CopyFiles */,
+				183F52712E844A9C0050DE94 /* libsteam_api.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,26 +168,26 @@
 		188E4B862E62C62700DDF480 /* w64steamui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = w64steamui.cpp; sourceTree = "<group>"; };
 		188E4B942E63C47D00DDF480 /* cn.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cn.ttf; sourceTree = "<group>"; };
 		18AD2D112E20DC8D00174B2A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		18C885732E84B8DC00637DBE /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
+		18C885742E84B8DC00637DBE /* imstb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_textedit.h; sourceTree = "<group>"; };
+		18C885752E84B8DC00637DBE /* imgui_impl_glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_glfw.h; sourceTree = "<group>"; };
+		18C885762E84B8DC00637DBE /* imgui_impl_glfw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_glfw.cpp; sourceTree = "<group>"; };
+		18C885772E84B8DC00637DBE /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		18C885782E84B8DC00637DBE /* imgui_impl_metal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = imgui_impl_metal.mm; sourceTree = "<group>"; };
+		18C885792E84B8DC00637DBE /* imstb_rectpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_rectpack.h; sourceTree = "<group>"; };
+		18C8857A2E84B8DC00637DBE /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
+		18C8857B2E84B8DD00637DBE /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
+		18C8857C2E84B8DD00637DBE /* imgui_impl_metal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_metal.h; sourceTree = "<group>"; };
+		18C8857D2E84B8DD00637DBE /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_tables.cpp; sourceTree = "<group>"; };
+		18C8857E2E84B8DD00637DBE /* imstb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_truetype.h; sourceTree = "<group>"; };
+		18C8857F2E84B8DD00637DBE /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
+		18C885802E84B8DD00637DBE /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
+		18C885812E84B8DD00637DBE /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Helvetica.ttc; sourceTree = "<group>"; };
 		18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sceneVideo.cpp; sourceTree = "<group>"; };
 		18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = w64nosteamui.cpp; sourceTree = "<group>"; };
 		18E107052E60FA15003CEAD2 /* wallpaper64.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wallpaper64.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E107092E60FA3A003CEAD2 /* apphide.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = apphide.mm; sourceTree = "<group>"; };
-		18E1070B2E60FA3A003CEAD2 /* imgui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui.h; sourceTree = "<group>"; };
-		18E1070C2E60FA3A003CEAD2 /* imstb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_textedit.h; sourceTree = "<group>"; };
-		18E1070D2E60FA3A003CEAD2 /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
-		18E1070E2E60FA3A003CEAD2 /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
-		18E1070F2E60FA3A003CEAD2 /* imstb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_truetype.h; sourceTree = "<group>"; };
-		18E107102E60FA3A003CEAD2 /* imgui_impl_metal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = imgui_impl_metal.mm; sourceTree = "<group>"; };
-		18E107112E60FA3A003CEAD2 /* imgui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui.cpp; sourceTree = "<group>"; };
-		18E107122E60FA3A003CEAD2 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
-		18E107132E60FA3A003CEAD2 /* imgui_impl_glfw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_glfw.h; sourceTree = "<group>"; };
-		18E107142E60FA3A003CEAD2 /* imgui_impl_metal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_impl_metal.h; sourceTree = "<group>"; };
-		18E107152E60FA3A003CEAD2 /* imstb_rectpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_rectpack.h; sourceTree = "<group>"; };
-		18E107162E60FA3A003CEAD2 /* imgui_tables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_tables.cpp; sourceTree = "<group>"; };
-		18E107172E60FA3A003CEAD2 /* imgui_impl_glfw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_impl_glfw.cpp; sourceTree = "<group>"; };
-		18E107182E60FA3A003CEAD2 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
-		18E107192E60FA3A003CEAD2 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
 		18E1071B2E60FA3A003CEAD2 /* IOSFileSystem.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IOSFileSystem.mm; sourceTree = "<group>"; };
 		18E1071C2E60FA3A003CEAD2 /* RenderEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderEngine.cpp; sourceTree = "<group>"; };
 		18E1071D2E60FA3A003CEAD2 /* TextureLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureLoader.cpp; sourceTree = "<group>"; };
@@ -222,7 +217,6 @@
 		18E107522E60FF1F003CEAD2 /* simdjson.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = simdjson.cpp; sourceTree = "<group>"; };
 		18E107552E60FF4D003CEAD2 /* wallpaper64.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = wallpaper64.h; sourceTree = "<group>"; };
 		18E107562E610257003CEAD2 /* wallpaper64.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = wallpaper64.cpp; sourceTree = "<group>"; };
-		18E107592E610487003CEAD2 /* tahoe.tex */ = {isa = PBXFileReference; lastKnownFileType = file; path = tahoe.tex; sourceTree = "<group>"; };
 		18E1090A2E610EC4003CEAD2 /* scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
 		18E1090B2E610EC4003CEAD2 /* scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scene.hpp; sourceTree = "<group>"; };
 		18ED16EF2E82463800EF1EE5 /* steam_appid.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = steam_appid.txt; sourceTree = "<group>"; };
@@ -323,7 +317,6 @@
 			children = (
 				18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */,
 				188E4B942E63C47D00DDF480 /* cn.ttf */,
-				18E107592E610487003CEAD2 /* tahoe.tex */,
 				18050BF22E6B1FB900E21E9B /* genericimage.shader */,
 				18ED16EF2E82463800EF1EE5 /* steam_appid.txt */,
 			);
@@ -367,21 +360,21 @@
 		18E1070A2E60FA3A003CEAD2 /* gui */ = {
 			isa = PBXGroup;
 			children = (
-				18E1070B2E60FA3A003CEAD2 /* imgui.h */,
-				18E1070C2E60FA3A003CEAD2 /* imstb_textedit.h */,
-				18E1070D2E60FA3A003CEAD2 /* imconfig.h */,
-				18E1070E2E60FA3A003CEAD2 /* imgui_widgets.cpp */,
-				18E1070F2E60FA3A003CEAD2 /* imstb_truetype.h */,
-				18E107102E60FA3A003CEAD2 /* imgui_impl_metal.mm */,
-				18E107112E60FA3A003CEAD2 /* imgui.cpp */,
-				18E107122E60FA3A003CEAD2 /* imgui_internal.h */,
-				18E107132E60FA3A003CEAD2 /* imgui_impl_glfw.h */,
-				18E107142E60FA3A003CEAD2 /* imgui_impl_metal.h */,
-				18E107152E60FA3A003CEAD2 /* imstb_rectpack.h */,
-				18E107162E60FA3A003CEAD2 /* imgui_tables.cpp */,
-				18E107172E60FA3A003CEAD2 /* imgui_impl_glfw.cpp */,
-				18E107182E60FA3A003CEAD2 /* imgui_demo.cpp */,
-				18E107192E60FA3A003CEAD2 /* imgui_draw.cpp */,
+				18C885812E84B8DD00637DBE /* imconfig.h */,
+				18C8857F2E84B8DD00637DBE /* imgui_demo.cpp */,
+				18C885772E84B8DC00637DBE /* imgui_draw.cpp */,
+				18C885762E84B8DC00637DBE /* imgui_impl_glfw.cpp */,
+				18C885752E84B8DC00637DBE /* imgui_impl_glfw.h */,
+				18C8857C2E84B8DD00637DBE /* imgui_impl_metal.h */,
+				18C885782E84B8DC00637DBE /* imgui_impl_metal.mm */,
+				18C885802E84B8DD00637DBE /* imgui_internal.h */,
+				18C8857D2E84B8DD00637DBE /* imgui_tables.cpp */,
+				18C885732E84B8DC00637DBE /* imgui_widgets.cpp */,
+				18C8857A2E84B8DC00637DBE /* imgui.cpp */,
+				18C8857B2E84B8DD00637DBE /* imgui.h */,
+				18C885792E84B8DC00637DBE /* imstb_rectpack.h */,
+				18C885742E84B8DC00637DBE /* imstb_textedit.h */,
+				18C8857E2E84B8DD00637DBE /* imstb_truetype.h */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -613,7 +606,7 @@
 				1877443E2E52A8A400D6193E /* Frameworks */,
 				187744462E52A8A400D6193E /* Resources */,
 				1877606B2E59770A0066A9AA /* Embed Libraries */,
-				18F3A3EF2E82448D002BF418 /* CopyFiles */,
+				18CB0D812E844A7100BB1E76 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -667,7 +660,6 @@
 				180A71892E7F203100A135EC /* assets in Resources */,
 				180A717F2E7F200E00A135EC /* Assets.xcassets in Resources */,
 				180A71BA2E7F2DDA00A135EC /* LaunchScreen.storyboard in Resources */,
-				180A718C2E7F203900A135EC /* tahoe.tex in Resources */,
 				18CB0D7A2E83AC4C00BB1E76 /* Helvetica.ttc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -680,7 +672,6 @@
 				18050BF32E6B1FB900E21E9B /* genericimage.shader in Resources */,
 				18ED16FD2E82E59500EF1EE5 /* .gitkeep in Resources */,
 				18CB0D792E83AC4C00BB1E76 /* Helvetica.ttc in Resources */,
-				18E1075A2E610487003CEAD2 /* tahoe.tex in Resources */,
 				188E4B952E63C47D00DDF480 /* cn.ttf in Resources */,
 				18ED16F02E82463800EF1EE5 /* steam_appid.txt in Resources */,
 				18F3A3E32E8242E7002BF418 /* steam_api.json in Resources */,
@@ -695,20 +686,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				180A718F2E7F206000A135EC /* NetGameWorkspaceMisc.cpp in Sources */,
-				180A71A62E7F213600A135EC /* imgui_draw.cpp in Sources */,
-				180A71A92E7F213600A135EC /* imgui_demo.cpp in Sources */,
+				18C885892E84B8DD00637DBE /* imgui_impl_metal.mm in Sources */,
 				18CB0D7D2E83B95200BB1E76 /* sceneVideo.cpp in Sources */,
 				18CB0D7F2E83BD6B00BB1E76 /* w64nosteamui.cpp in Sources */,
 				180A71902E7F206000A135EC /* Camera.cpp in Sources */,
+				18C8858F2E84B8DD00637DBE /* imgui_demo.cpp in Sources */,
 				180A71A22E7F206A00A135EC /* simdjson.cpp in Sources */,
 				180A718B2E7F203900A135EC /* genericimage.shader in Sources */,
-				180A71A72E7F213600A135EC /* imgui_widgets.cpp in Sources */,
 				180A719A2E7F206000A135EC /* mtl_shader.cpp in Sources */,
+				18C885872E84B8DD00637DBE /* imgui_draw.cpp in Sources */,
+				18C885852E84B8DD00637DBE /* imgui_impl_glfw.cpp in Sources */,
+				18C885832E84B8DD00637DBE /* imgui_widgets.cpp in Sources */,
 				180A71922E7F206000A135EC /* mtl_texture.cpp in Sources */,
 				180A71A42E7F207000A135EC /* 07-texturing.cpp in Sources */,
 				180A71932E7F206000A135EC /* TextureLoader.cpp in Sources */,
 				180A719D2E7F206600A135EC /* scene.cpp in Sources */,
-				180A71AC2E7F213600A135EC /* imgui.cpp in Sources */,
 				180A71A12E7F206A00A135EC /* lz4.cpp in Sources */,
 				180A719E2E7F206600A135EC /* sceneParticle.cpp in Sources */,
 				180A719F2E7F206600A135EC /* pakImage.cpp in Sources */,
@@ -716,16 +708,16 @@
 				180A719C2E7F206600A135EC /* wallpaper64.cpp in Sources */,
 				180A71A32E7F207000A135EC /* touch.mm in Sources */,
 				180A71912E7F206000A135EC /* mtl_shadercompiler.cpp in Sources */,
-				180A71AA2E7F213600A135EC /* imgui_tables.cpp in Sources */,
+				18C8858D2E84B8DD00637DBE /* imgui_tables.cpp in Sources */,
 				180A71972E7F206000A135EC /* MeshResource.cpp in Sources */,
 				180A71982E7F206000A135EC /* mtl_resourcestate.cpp in Sources */,
-				180A71A82E7F213600A135EC /* imgui_impl_metal.mm in Sources */,
 				180A718E2E7F206000A135EC /* NetGameWorkspace.cpp in Sources */,
 				180A71952E7F206000A135EC /* mtl_pipeline.cpp in Sources */,
 				180A71962E7F206000A135EC /* IOSFileSystem.mm in Sources */,
 				180A71992E7F206000A135EC /* mtl_buffer.cpp in Sources */,
 				180A71942E7F206000A135EC /* RenderEngine.cpp in Sources */,
 				180A719B2E7F206000A135EC /* NetGameMeshLoader.cpp in Sources */,
+				18C8858B2E84B8DD00637DBE /* imgui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,12 +726,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				18E1073D2E60FA3A003CEAD2 /* Camera.cpp in Sources */,
+				18C885882E84B8DD00637DBE /* imgui_impl_metal.mm in Sources */,
 				18E107412E60FA3A003CEAD2 /* mtl_shadercompiler.cpp in Sources */,
 				18E107452E60FA3A003CEAD2 /* mtl_resourcestate.cpp in Sources */,
 				188E4B3D2E6276E500DDF480 /* sceneParticle.cpp in Sources */,
+				18C8858E2E84B8DD00637DBE /* imgui_demo.cpp in Sources */,
 				18E1074D2E60FEF1003CEAD2 /* pakImage.cpp in Sources */,
 				18E107572E610257003CEAD2 /* wallpaper64.cpp in Sources */,
 				18CB0D7C2E83B95200BB1E76 /* sceneVideo.cpp in Sources */,
+				18C885862E84B8DD00637DBE /* imgui_draw.cpp in Sources */,
+				18C885842E84B8DD00637DBE /* imgui_impl_glfw.cpp in Sources */,
+				18C885822E84B8DD00637DBE /* imgui_widgets.cpp in Sources */,
 				18E1073F2E60FA3A003CEAD2 /* mtl_buffer.cpp in Sources */,
 				18E107402E60FA3A003CEAD2 /* mtl_shader.cpp in Sources */,
 				18E107542E60FF1F003CEAD2 /* simdjson.cpp in Sources */,
@@ -748,24 +745,19 @@
 				18E107472E60FA3A003CEAD2 /* main.cpp in Sources */,
 				188E4B872E62C62700DDF480 /* w64steamui.cpp in Sources */,
 				18ED16F82E82D7BF00EF1EE5 /* pakFile.cpp in Sources */,
-				18E107342E60FA3A003CEAD2 /* imgui.cpp in Sources */,
 				18E1073E2E60FA3A003CEAD2 /* NetGameMeshLoader.cpp in Sources */,
-				18E107332E60FA3A003CEAD2 /* imgui_impl_metal.mm in Sources */,
 				18E107532E60FF1F003CEAD2 /* lz4.cpp in Sources */,
 				180A71692E7F1E0E00A135EC /* tahoe_management.cpp in Sources */,
-				18E107322E60FA3A003CEAD2 /* imgui_widgets.cpp in Sources */,
-				18E107352E60FA3A003CEAD2 /* imgui_tables.cpp in Sources */,
+				18C8858C2E84B8DD00637DBE /* imgui_tables.cpp in Sources */,
 				18E107432E60FA3A003CEAD2 /* NetGameWorkspaceMisc.cpp in Sources */,
 				18E1073C2E60FA3A003CEAD2 /* NetGameWorkspace.cpp in Sources */,
-				18E107372E60FA3A003CEAD2 /* imgui_demo.cpp in Sources */,
 				18E107392E60FA3A003CEAD2 /* IOSFileSystem.mm in Sources */,
-				18E107362E60FA3A003CEAD2 /* imgui_impl_glfw.cpp in Sources */,
 				18E1073B2E60FA3A003CEAD2 /* TextureLoader.cpp in Sources */,
-				18E107382E60FA3A003CEAD2 /* imgui_draw.cpp in Sources */,
 				18E1090C2E610EC4003CEAD2 /* scene.cpp in Sources */,
 				18E107442E60FA3A003CEAD2 /* mtl_texture.cpp in Sources */,
 				18E107422E60FA3A003CEAD2 /* MeshResource.cpp in Sources */,
 				18E1073A2E60FA3A003CEAD2 /* RenderEngine.cpp in Sources */,
+				18C8858A2E84B8DD00637DBE /* imgui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

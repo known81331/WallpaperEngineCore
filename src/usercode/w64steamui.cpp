@@ -81,18 +81,19 @@ public:
             0,
             k_EUGCRead_ContinueReadingUntilFinished
         );
-        
-        FIMEMORY *stream = FreeImage_OpenMemory((BYTE*)buffer, pCallback->m_nSizeInBytes);
-        FIBITMAP *bmp2 = FreeImage_LoadFromMemory(FreeImage_GetFileTypeFromMemory(stream, 0), stream);
-        FIBITMAP *bmp = FreeImage_ConvertTo32Bits(bmp2);
-        MTLTexture tex;
-        tex.create(FreeImage_GetWidth(bmp), FreeImage_GetHeight(bmp), MTL::PixelFormatBGRA8Unorm, MTL::TextureType2D, MTL::StorageModeManaged, MTL::TextureUsageShaderRead);
-        tex.upload(4, FreeImage_GetBits(bmp));
-        details_previews[pCallback->m_hFile] = tex;
-        FreeImage_Unload(bmp);
-        FreeImage_Unload(bmp2);
-        FreeImage_CloseMemory(stream);
-        free(buffer);
+        if (bytesRead) {
+            FIMEMORY *stream = FreeImage_OpenMemory((BYTE*)buffer, pCallback->m_nSizeInBytes);
+            FIBITMAP *bmp2 = FreeImage_LoadFromMemory(FreeImage_GetFileTypeFromMemory(stream, 0), stream);
+            FIBITMAP *bmp = FreeImage_ConvertTo32Bits(bmp2);
+            MTLTexture tex;
+            tex.create(FreeImage_GetWidth(bmp), FreeImage_GetHeight(bmp), MTL::PixelFormatBGRA8Unorm, MTL::TextureType2D, MTL::StorageModeManaged, MTL::TextureUsageShaderRead);
+            tex.upload(4, FreeImage_GetBits(bmp));
+            details_previews[pCallback->m_hFile] = tex;
+            FreeImage_Unload(bmp);
+            FreeImage_Unload(bmp2);
+            FreeImage_CloseMemory(stream);
+            free(buffer);
+        }
      
       //  delete this;
     }
@@ -190,7 +191,7 @@ void SteamUI_DrawCell(SteamUGCDetails_t& detail) {
             
             
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0,0));
-        if ( ImGui::ImageButton(detail.m_rgchTitle, (ImTextureID)details_previews[detail.m_hPreviewFile]._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0, 1), ImVec2(1,0), col, ImColor(120,120,120) ) ) {
+        if ( ImGui::ImageButton(detail.m_rgchTitle, (ImTextureID)details_previews[detail.m_hPreviewFile]._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0, 1), ImVec2(1,0), col, col ) ) {
             SteamUI_DownloadItem(detail.m_nPublishedFileId);
         }
         ImGui::PopStyleVar();
@@ -205,7 +206,7 @@ void SteamUI_DrawCell(SteamUGCDetails_t& detail) {
         ImGui::PopFont();
         
         ImGui::SetCursorPos(ImVec2((_steamUIState.iconsize/2)-ImGui::CalcTextSize(detail.m_rgchTitle).x/2,cursorPos.y-50));
-        ImGui::Text(detail.m_rgchTitle);
+        ImGui::Text("%s", detail.m_rgchTitle);
     }
     ImGui::EndChild();
 }
@@ -236,7 +237,6 @@ void SteamUI_RefreshWorkshopList(EUGCQuery ranking = k_EUGCQuery_RankedByTrend, 
             SteamUGC()->SetSearchText(queryHandle, searchValue);
         
         auto apiCall = SteamUGC()->SendQueryUGCRequest(queryHandle);
-        bool bFailed = false;
         
         CSteamUI_Handler* _steamUIHandler = new CSteamUI_Handler();
         
@@ -255,7 +255,7 @@ void SteamUI_WorkshopList() {
         for (int i = 0 ; i < details_previews.size() ; i++) {
             ImGui::SetNextItemAllowOverlap();
             SteamUI_DrawCell(details[i]);
-            if ( (i+1) % ((int)ImGui::GetWindowWidth() / _steamUIState.iconsize) )
+            if ( (i+1) % std::max( ((int)ImGui::GetWindowWidth() / _steamUIState.iconsize), 1) )
                 ImGui::SameLine();
         }
             
@@ -276,7 +276,7 @@ void SteamUI_DrawCell_local(SteamUIDownloaded_t& detail) {
         ImColor col(255,255,255);
         
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0,0));
-        if ( ImGui::ImageButton(" ", (ImTextureID)tex._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0,0), ImVec2(1,1), col, ImColor(120,120,120) ) ) {
+        if ( ImGui::ImageButton(" ", (ImTextureID)tex._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0,0), ImVec2(1,1), col, col ) ) {
             PAKFile_LoadAndDecompress( (std::string(detail.folderPath) + "/scene.pkg").data());
             scene.destroy();
             scene.init((Wallpaper64GetStorageDir() + "tmp_scene").data());
@@ -289,7 +289,7 @@ void SteamUI_DrawCell_local(SteamUIDownloaded_t& detail) {
         ImGui::Text("%lld", detail.id);
     }
     else
-        ImGui::Text("Item missing/corrupted!\n%d", detail.id);
+        ImGui::Text("Item missing/corrupted!\n%lld", detail.id);
     ImGui::EndChild();
 }
 
@@ -320,13 +320,18 @@ void SteamUI_LocalList() {
         
         SteamUI_DrawCell_local(i.second);
         
-        if ( (id+1) % ((int)ImGui::GetWindowWidth() / _steamUIState.iconsize) )
+        if ( (id+1) % std::max( ((int)ImGui::GetWindowWidth() / _steamUIState.iconsize), 1) )
             ImGui::SameLine();
         id++;
     }
 }
 
 void SteamUI_Hotbar() {
+
+    if (ImGui::BeginPopup("Filter popup")) {
+
+        ImGui::EndPopup();
+    }
     
     static char const * items[] = {
         "RankedByVote",
@@ -409,7 +414,7 @@ void SteamUI_Hotbar() {
     ImGui::SameLine();
     
     if (ImGui::Button("Filter >>"))
-        ;
+        ImGui::OpenPopup("Filter popup");
     
     
     ImGui::SameLine();

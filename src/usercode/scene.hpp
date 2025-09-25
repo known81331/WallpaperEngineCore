@@ -74,6 +74,8 @@ struct Model {
 class Scene {
 public:
     void init(const std::string& path);
+    void initForVideo(const std::string& path);
+    void initForWeb(const std::string& path);
     void update();
     void render();
     void destroy();

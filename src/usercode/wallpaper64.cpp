@@ -65,7 +65,7 @@ void ClockTile() {
 }
 
 void BuildTile() {
-    char* text = __TIME__ " " __DATE__ " (ngbuild)";
+    const char* text = __TIME__ " " __DATE__ " (ngbuild)";
     ImGui::SameLine(ImGui::GetWindowWidth() / 2 - ImGui::CalcTextSize(text).x / 2 );
     ImGui::TextColored( ImVec4(0.5f, 0.5f, 0.5f, 1.f), "%s", text);
 }
@@ -153,6 +153,11 @@ void NetGameImguiWindow() {
         colors[ImGuiCol_ResizeGrip]             = ImVec4(0.07f, 0.08f, 0.09f, 0.20f);
         colors[ImGuiCol_ResizeGripHovered]      = ImVec4(0.17f, 0.17f, 0.15f, 0.66f);
         colors[ImGuiCol_ResizeGripActive]       = ImVec4(0.98f, 0.98f, 0.89f, 0.95f);
+        colors[ImGuiCol_FrameBg]                = ImVec4(0.01f, 0.01f, 0.01f, 0.54f);
+        colors[ImGuiCol_Button]                 = ImVec4(0.12f, 0.13f, 0.17f, 1.00f);
+        colors[ImGuiCol_TabSelected]            = ImVec4(0.58f, 0.56f, 0.45f, 1.00f);
+
+
 
 
         ImGuiStyle& style = ImGui::GetStyle();
@@ -184,7 +189,7 @@ void NetGameImguiWindow() {
     
     for (auto* i : scene.models) {
         ImGui::PushID(i);
-        ImGui::Text(i->name.data());
+        ImGui::Text("%s", i->name.data());
         float cxx[2];
         cxx[0] = i->origin.x; cxx[1] = i->origin.y;
         ImGui::DragFloat2("pos", cxx);
@@ -207,7 +212,7 @@ void NetGameImguiWindow() {
                 r->cropOffset = {cxx[0], cxx[1]};
             }
             if (ParticleRender* r = dynamic_cast<ParticleRender*>(i->render)) {
-                ImGui::Text("emitter count %d", r->insts.size());
+                ImGui::Text("emitter count %ld", r->insts.size());
             }
         }
         
@@ -221,6 +226,7 @@ void NetGameImguiWindow() {
     
     ImGui::End();
     
+    ImGui::ShowDemoWindow();
    // return;
     Wallpaper64SteamUI();
     
@@ -256,7 +262,7 @@ void NetGameImguiWindow() {
                         ImVec2 cursorPos = ImVec2(pos.x,  -pos.y) - ImVec2((size.x * 0.5f) * i->xOffset, (size.y * 0.5f)  * i->yOffset);
                         
                         ImGui::SetCursorPos(cursorPos * _scale + camPos);
-                        ImGui::Image((ImTextureID)i->render->material.texture->_pTexture, size * _scale, ImVec2(0,0), ImVec2(1,1), ImVec4(1.f,1.f,1.f,0.3f) );
+                       // ImGui::Image(ImTextureRef(i->render->material.texture->_pTexture), size * _scale, ImVec2(0,0), ImVec2(1,1), ImVec4(1.f,1.f,1.f,0.3f) );
                     }
                 }
             }
@@ -264,6 +270,8 @@ void NetGameImguiWindow() {
         }
     }
     ImGui::PopStyleVar();
+    
+    
     
     ImGui::End();
     

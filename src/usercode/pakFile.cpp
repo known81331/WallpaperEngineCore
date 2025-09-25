@@ -27,9 +27,7 @@ using namespace std;
 static FILE *file;
 static uint32_t filecount;
 static char *version;
-static uint32_t ds_ptr;
-static uint32_t f_pos;
-static uint32_t c_pos;
+static long ds_ptr;
 
 typedef struct
 {
@@ -72,7 +70,7 @@ file_t *read_files()
         fread(&files[i].size, 4, 1, file);
         ds_ptr = ftell(file);
     }
-    printf("data_structure pointer: %x\n", ds_ptr);
+    printf("data_structure pointer: %lx\n", ds_ptr);
     return files;
 }
 

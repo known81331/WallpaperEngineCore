@@ -21,7 +21,7 @@ int main( int argc, char* argv[] )
     
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
-  //  ImGui::GetIO().Fonts->AddFontDefault();
+ //   ImGui::GetIO().Fonts->AddFontDefault();
     
     if (!glfwInit())
         return 0;
@@ -40,8 +40,9 @@ int main( int argc, char* argv[] )
     
     
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("cn.ttf").data(), 16.f, nullptr, ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
-    ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("helvetica.ttc").data(), 24.f, nullptr, ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
+    //ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("cn.ttf").data(), 16.f, nullptr, ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
+    ImGui::GetIO().Fonts->AddFontFromFileTTF("/System/Library/Fonts/PingFang.ttc", 16.f);
+    ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("helvetica.ttc").data(), 24.f);
 
     void tahoe_create(MTL::Device*);
     tahoe_create(_pDevice);

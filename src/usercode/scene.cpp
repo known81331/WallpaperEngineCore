@@ -5,6 +5,11 @@
 //  Created by apple on 2025-08-28.
 //  Copyright © 2025 Apple. All rights reserved.
 //
+
+// the actual creation date is 2025-06-05,
+//  it has been migrated from the opengl renderer due to severe performance issues
+//  but frontend (parser) can be kept
+
 #include "deps/simdjson.h"
 #include "scene.hpp"
 #include "../netgame4mt/TextureLoader.hpp"
@@ -375,11 +380,13 @@ void Scene::init(const std::string& path) {
     
 }
 
-extern int modFactor;
-extern int overdrawFactor;
+
+void Scene::initForVideo(const std::string& path) {
+    
+}
+    
 
 void Scene::render() {
-    int drawcounter = 0;
 
 }
 
