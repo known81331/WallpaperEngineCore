@@ -68,6 +68,7 @@ void* contentView(GLFWwindow* wnd) {
     return (__bridge void*)metalWindow.contentView;
 }
 
+
 void* currentDrawable() {           
     return (__bridge void*)[metalLayer nextDrawable];
 }

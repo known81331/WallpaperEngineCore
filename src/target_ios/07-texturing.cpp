@@ -26,7 +26,6 @@
 #include <simd/simd.h>
 
 #define IMGUI_DEFINE_MATH_OPERATORS
-#define IMGUI_IMPL_METAL_CPP
 #include "../gui/imgui.h"
 #include "../gui/imgui_impl_metal.h"
 

@@ -11,8 +11,8 @@
 //  but frontend (parser) can be kept
 
 #include "deps/simdjson.h"
+#include "TextureLoader.hpp"
 #include "scene.hpp"
-#include "../netgame4mt/TextureLoader.hpp"
 
 std::string GetBundleFilePath(const std::string& filename);
 
@@ -382,17 +382,25 @@ void Scene::init(const std::string& path) {
 
 
 void Scene::initForVideo(const std::string& path) {
-    
+    Model* model = new Model();
+    model->render = new VideoRender();
+    ((VideoRender*)model->render)->init(path);
+    models.push_back(model);
 }
     
 
-void Scene::render() {
-
+void Scene::update() {
+    for (auto& i : models) {
+        if (i->render) {
+            i->render->update();
+        }
+    }
 }
 
 void Scene::destroy() {
     for (auto& i : models) {
         if (i->render) {
+            i->render->destroy();
             if (i->render->material.texture) {
                 if (i->render->material.texture->_pTexture)
                     i->render->material.texture->destroy();

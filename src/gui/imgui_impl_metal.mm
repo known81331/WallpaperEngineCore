@@ -37,7 +37,6 @@
 //  2018-07-05: Metal: Added new Metal backend implementation.
 
 
-#define IMGUI_IMPL_METAL_CPP
 #include "imgui.h"
 #ifndef IMGUI_DISABLE
 #include "imgui_impl_metal.h"
@@ -163,11 +162,9 @@ void ImGui_ImplMetal_NewFrame(MTLRenderPassDescriptor* renderPassDescriptor)
 {
     ImGui_ImplMetal_Data* bd = ImGui_ImplMetal_GetBackendData();
     IM_ASSERT(bd != nil && "Context or backend not initialized! Did you call ImGui_ImplMetal_Init()?");
-//#ifdef IMGUI_IMPL_METAL_CPP
- //   bd->SharedMetalContext.framebufferDescriptor = [[[FramebufferDescriptor alloc] initWithRenderPassDescriptor:renderPassDescriptor]autorelease];
-//#else
+
     bd->SharedMetalContext.framebufferDescriptor = [[FramebufferDescriptor alloc] initWithRenderPassDescriptor:renderPassDescriptor];
-//#endif
+
     if (bd->SharedMetalContext.depthStencilState == nil)
         ImGui_ImplMetal_CreateDeviceObjects(bd->SharedMetalContext.device);
 }
@@ -408,9 +405,6 @@ bool ImGui_ImplMetal_CreateDeviceObjects(id<MTLDevice> device)
     depthStencilDescriptor.depthWriteEnabled = NO;
     depthStencilDescriptor.depthCompareFunction = MTLCompareFunctionAlways;
     bd->SharedMetalContext.depthStencilState = [device newDepthStencilStateWithDescriptor:depthStencilDescriptor];
-#ifdef IMGUI_IMPL_METAL_CPP
-//    [depthStencilDescriptor release];
-#endif
 
     return true;
 }

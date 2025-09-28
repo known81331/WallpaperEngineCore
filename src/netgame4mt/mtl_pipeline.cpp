@@ -10,7 +10,6 @@
 #define MTL_PRIVATE_IMPLEMENTATION
 #define MTK_PRIVATE_IMPLEMENTATION
 #define CA_PRIVATE_IMPLEMENTATION
-#define IMGUI_IMPL_METAL_CPP
 #include "../gui/imgui_impl_metal.h"
 #include "RenderEngine.hpp"
 
@@ -19,7 +18,7 @@ MTLRenderer* MTLRenderer::_pSingleton = nullptr;
 void MTLRenderer::init(MTL::Device *device) {
     _pDevice = device;
     _pCommandQueue = _pDevice->newCommandQueue();
-    _semaphore = dispatch_semaphore_create( 1 );
+    _semaphore = dispatch_semaphore_create( 5 );
     ImGui_ImplMetal_Init(_pDevice);
 }
 
@@ -119,13 +118,7 @@ void MTLRenderer::beginFrame() {
         dispatch_semaphore_signal( pRenderer->_semaphore );
     });
     
-    renderCompositionShadowPipeline(pCmd);
-    
     renderCompositionPipeline(pCmd);
-    renderSequoiaPipeline(pCmd, pDrawable);
-    renderLightingPipeline(pCmd, pDrawable);
-    renderSkydome(pCmd, pDrawable);
-    renderGodraysPipeline(pCmd);
     renderTahoePipeline(pCmd, pDrawable);
     
     pCmd->presentDrawable( pDrawable );

@@ -62,6 +62,7 @@ void ClockTile() {
 
     if ( ImGui::MenuItem(ctm) )
         date = !date;
+    
 }
 
 void BuildTile() {
@@ -120,7 +121,9 @@ void NetGameTaskbar() {
 Scene scene;
 
 void NetGameImguiWindow() {
-    static PAKImage img;
+    
+    NetGameTaskbar();
+    
     static int count = 70;
     static float _size = 1;
     static float _scale = 1.f;
@@ -238,6 +241,7 @@ void NetGameImguiWindow() {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0,0));
     ImGui::Begin("canva", 0, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoFocusOnAppearing);
     
+    scene.update();
     {
         int c = 0;
         for (auto* i : scene.models) {
@@ -262,19 +266,21 @@ void NetGameImguiWindow() {
                         ImVec2 cursorPos = ImVec2(pos.x,  -pos.y) - ImVec2((size.x * 0.5f) * i->xOffset, (size.y * 0.5f)  * i->yOffset);
                         
                         ImGui::SetCursorPos(cursorPos * _scale + camPos);
-                       // ImGui::Image(ImTextureRef(i->render->material.texture->_pTexture), size * _scale, ImVec2(0,0), ImVec2(1,1), ImVec4(1.f,1.f,1.f,0.3f) );
+                        ImGui::Image((ImTextureID)i->render->material.texture->_pTexture, size * _scale, ImVec2(0,0), ImVec2(1,1) );
                     }
                 }
+                else if (VideoRender* r = dynamic_cast<VideoRender*>(i->render)) {
+                        ImVec2 size = i->recursedScale * ImVec2(i->size.x, i->size.y) * _size;
+                        ImGui::SetCursorPos(ImVec2(0,0));
+                        ImGui::Image((ImTextureID)i->render->material.texture->_pTexture, size * _scale, ImVec2(0,0), ImVec2(1,1) );
+                    }
             }
             c++;
         }
     }
+    
     ImGui::PopStyleVar();
-    
-    
-    
     ImGui::End();
     
-    NetGameTaskbar();
     
 }

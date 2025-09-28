@@ -8,8 +8,8 @@
 
 #include "wallpaper64.h"
 #include "scene.hpp"
+
 #include "steam_api.h"
-#include "TextureLoader.hpp"
 
 int _steamStatus = 0;
 bool _gSteamInit = false;
@@ -92,8 +92,8 @@ public:
             FreeImage_Unload(bmp);
             FreeImage_Unload(bmp2);
             FreeImage_CloseMemory(stream);
-            free(buffer);
         }
+        free(buffer);
      
       //  delete this;
     }
@@ -199,11 +199,11 @@ void SteamUI_DrawCell(SteamUGCDetails_t& detail) {
         ImVec2 cursorPos = ImGui::GetCursorPos();
         
         ImGui::SetCursorPos(ImVec2(0,cursorPos.y/2));
-        ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[1]);
         if (downloadingItems[detail.m_nPublishedFileId]) {
+          //  ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
             ImGui::TextColored(ImColor(0.5f, 0.5f, 1.f), "DOWNLOADING");
+           // ImGui::PopFont();
         }
-        ImGui::PopFont();
         
         ImGui::SetCursorPos(ImVec2((_steamUIState.iconsize/2)-ImGui::CalcTextSize(detail.m_rgchTitle).x/2,cursorPos.y-50));
         ImGui::Text("%s", detail.m_rgchTitle);
@@ -277,9 +277,13 @@ void SteamUI_DrawCell_local(SteamUIDownloaded_t& detail) {
         
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0,0));
         if ( ImGui::ImageButton(" ", (ImTextureID)tex._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0,0), ImVec2(1,1), col, col ) ) {
-            PAKFile_LoadAndDecompress( (std::string(detail.folderPath) + "/scene.pkg").data());
+           // PAKFile_LoadAndDecompress( (std::string(detail.folderPath) + "/scene.pkg").data());
+          //  scene.destroy();
+         //   scene.init((Wallpaper64GetStorageDir() + "tmp_scene").data());
+            
+            
             scene.destroy();
-            scene.init((Wallpaper64GetStorageDir() + "tmp_scene").data());
+            scene.initForVideo((std::string(detail.folderPath) + "/Cast n Chill 2 fade.mp4").data());
         }
         ImGui::PopStyleVar();
         
@@ -453,6 +457,7 @@ void Wallpaper64SteamUI() {
             SteamUGC()->UnsubscribeItem(i.first);
         }
     }
+    
     
     SteamUI_Hotbar() ;
     

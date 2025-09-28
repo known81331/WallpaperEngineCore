@@ -9,7 +9,28 @@
 #ifndef scene_hpp
 #define scene_hpp
 
-#include "wallpaper64.h"
+#include <string>
+#include <chrono>
+#include <thread>
+#include <filesystem>
+#include <cstdint>
+#include <string>
+#include <fstream>
+#include <cstdio>
+#include <vector>
+#include <unordered_map>
+
+extern "C" {
+#include <libavcodec/avcodec.h>
+#include <libavformat/avformat.h>
+#include <libavutil/imgutils.h>
+#include <libavutil/avutil.h>
+#include <libswscale/swscale.h>
+}
+
+#include "pak.h"
+
+#include "RenderEngine.hpp"
 
 struct Material {
     MTLTexture* texture;
@@ -19,6 +40,8 @@ struct Material {
 
 class Render {
 public:
+    virtual void update() {};
+    virtual void destroy() {};
     virtual ~Render() {} 
     Material material;
     std::string name;
@@ -52,6 +75,20 @@ public:
     void update(const simd::float3& parentPos);
 };
 
+class VideoRender : public Render {
+public:
+    void init(const std::string& path);
+    void update() override;
+    void destroy() override;
+private:
+    SwsContext* converter_ctx = nullptr;
+    AVFormatContext* format_ctx = nullptr;
+    AVCodecContext* codec_ctx = nullptr;
+    AVFrame* frame, *frame2;
+    int video_stream_idx = -1;
+    uint64_t ot = 0;
+};
+
 struct Model {
     uint64_t id;
     uint64_t parentId;
@@ -77,7 +114,6 @@ public:
     void initForVideo(const std::string& path);
     void initForWeb(const std::string& path);
     void update();
-    void render();
     void destroy();
 
     void parseMaterial(Material&, const std::string& path);

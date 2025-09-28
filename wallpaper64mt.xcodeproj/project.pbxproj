@@ -75,6 +75,10 @@
 		18C8858D2E84B8DD00637DBE /* imgui_tables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857D2E84B8DD00637DBE /* imgui_tables.cpp */; };
 		18C8858E2E84B8DD00637DBE /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857F2E84B8DD00637DBE /* imgui_demo.cpp */; };
 		18C8858F2E84B8DD00637DBE /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18C8857F2E84B8DD00637DBE /* imgui_demo.cpp */; };
+		18C8921E2E8988FA0000C48F /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C8921B2E8988EA0000C48F /* libavcodec.a */; };
+		18C8921F2E8988FA0000C48F /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C8921D2E8988EB0000C48F /* libavformat.a */; };
+		18C892202E8988FA0000C48F /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C8921C2E8988EA0000C48F /* libavutil.a */; };
+		18C892212E8988FA0000C48F /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18C8921A2E8988E90000C48F /* libswscale.a */; };
 		18CB0D792E83AC4C00BB1E76 /* Helvetica.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */; };
 		18CB0D7A2E83AC4C00BB1E76 /* Helvetica.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */; };
 		18CB0D7C2E83B95200BB1E76 /* sceneVideo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */; };
@@ -183,6 +187,11 @@
 		18C8857F2E84B8DD00637DBE /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
 		18C885802E84B8DD00637DBE /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
 		18C885812E84B8DD00637DBE /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
+		18C892192E89889A0000C48F /* pak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pak.h; path = src/usercode/pak.h; sourceTree = SOURCE_ROOT; };
+		18C8921A2E8988E90000C48F /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../../../../../../usr/local/Cellar/ffmpeg/7.1.1_3/lib/libswscale.a; sourceTree = "<group>"; };
+		18C8921B2E8988EA0000C48F /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../../../../../../usr/local/Cellar/ffmpeg/7.1.1_3/lib/libavcodec.a; sourceTree = "<group>"; };
+		18C8921C2E8988EA0000C48F /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../../../../../../usr/local/Cellar/ffmpeg/7.1.1_3/lib/libavutil.a; sourceTree = "<group>"; };
+		18C8921D2E8988EB0000C48F /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../../../../../../usr/local/Cellar/ffmpeg/7.1.1_3/lib/libavformat.a; sourceTree = "<group>"; };
 		18CB0D782E83AC4B00BB1E76 /* Helvetica.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Helvetica.ttc; sourceTree = "<group>"; };
 		18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sceneVideo.cpp; sourceTree = "<group>"; };
 		18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = w64nosteamui.cpp; sourceTree = "<group>"; };
@@ -296,12 +305,16 @@
 				1877443F2E52A8A400D6193E /* Cocoa.framework in Frameworks */,
 				1804D4412E5BF408005714B1 /* libassimp.5.4.3.dylib in Frameworks */,
 				1804D4452E5CF39D005714B1 /* libfreeimage_arm64.dylib in Frameworks */,
+				18C8921F2E8988FA0000C48F /* libavformat.a in Frameworks */,
 				187744402E52A8A400D6193E /* QuartzCore.framework in Frameworks */,
 				187744422E52A8A400D6193E /* Foundation.framework in Frameworks */,
+				18C892202E8988FA0000C48F /* libavutil.a in Frameworks */,
+				18C8921E2E8988FA0000C48F /* libavcodec.a in Frameworks */,
 				187744432E52A8A400D6193E /* Metal.framework in Frameworks */,
 				18F3A35E2E82428A002BF418 /* libsteam_api.dylib in Frameworks */,
 				188E4B842E62C22F00DDF480 /* libfreeimage.3.18.0.dylib in Frameworks */,
 				187744442E52A8A400D6193E /* MetalKit.framework in Frameworks */,
+				18C892212E8988FA0000C48F /* libswscale.a in Frameworks */,
 				18E107492E60FB72003CEAD2 /* libglfw.3.dylib in Frameworks */,
 				18F3A3E42E8242E7002BF418 /* libsdkencryptedappticket.dylib in Frameworks */,
 				187744452E52A8A400D6193E /* IOKit.framework in Frameworks */,
@@ -410,16 +423,17 @@
 			isa = PBXGroup;
 			children = (
 				18E1074E2E60FF1F003CEAD2 /* deps */,
-				18E1074C2E60FEF1003CEAD2 /* pakImage.cpp */,
+				18C892192E89889A0000C48F /* pak.h */,
 				18ED16F62E82D7BF00EF1EE5 /* pakFile.cpp */,
-				18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */,
-				188E4B862E62C62700DDF480 /* w64steamui.cpp */,
-				18E107562E610257003CEAD2 /* wallpaper64.cpp */,
-				18E107552E60FF4D003CEAD2 /* wallpaper64.h */,
+				18E1074C2E60FEF1003CEAD2 /* pakImage.cpp */,
 				18E1090A2E610EC4003CEAD2 /* scene.cpp */,
 				18E1090B2E610EC4003CEAD2 /* scene.hpp */,
 				188E4B3C2E6276E500DDF480 /* sceneParticle.cpp */,
 				18CB0D7B2E83B95200BB1E76 /* sceneVideo.cpp */,
+				18CB0D7E2E83BD6B00BB1E76 /* w64nosteamui.cpp */,
+				188E4B862E62C62700DDF480 /* w64steamui.cpp */,
+				18E107562E610257003CEAD2 /* wallpaper64.cpp */,
+				18E107552E60FF4D003CEAD2 /* wallpaper64.h */,
 			);
 			path = usercode;
 			sourceTree = "<group>";
@@ -556,6 +570,10 @@
 		71A9C07427349D4100932563 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18C8921B2E8988EA0000C48F /* libavcodec.a */,
+				18C8921D2E8988EB0000C48F /* libavformat.a */,
+				18C8921C2E8988EA0000C48F /* libavutil.a */,
+				18C8921A2E8988E90000C48F /* libswscale.a */,
 				18F3A35D2E82428A002BF418 /* libsteam_api.dylib */,
 				180A71B72E7F223C00A135EC /* Foundation.framework */,
 				180A71B52E7F223300A135EC /* MetalKit.framework */,
@@ -867,6 +885,7 @@
 					"learn-metal/07-textured",
 					/usr/local/Cellar/freeimage/3.18.0/include,
 					/usr/local/Cellar/assimp/6.0.2/include,
+					/usr/local/Cellar/ffmpeg/7.1.1_3/include,
 				);
 				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -892,6 +911,7 @@
 					"$(PROJECT_DIR)/steamsdk/public/steam/lib/osx",
 					"$(PROJECT_DIR)/steamsdk/public/steam/lib/win64",
 					"$(PROJECT_DIR)/steamsdk/public/steam/lib/win32",
+					/usr/local/Cellar/ffmpeg/7.1.1_3/lib,
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = 1;
@@ -926,6 +946,7 @@
 					"learn-metal/07-textured",
 					/usr/local/Cellar/freeimage/3.18.0/include,
 					/usr/local/Cellar/assimp/6.0.2/include,
+					/usr/local/Cellar/ffmpeg/7.1.1_3/include,
 				);
 				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
@@ -951,6 +972,7 @@
 					"$(PROJECT_DIR)/steamsdk/public/steam/lib/osx",
 					"$(PROJECT_DIR)/steamsdk/public/steam/lib/win64",
 					"$(PROJECT_DIR)/steamsdk/public/steam/lib/win32",
+					/usr/local/Cellar/ffmpeg/7.1.1_3/lib,
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.myself.wallpaper64;

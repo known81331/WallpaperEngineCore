@@ -1,4 +1,4 @@
-#include "wallpaper64.h"
+#include "pak.h"
 #include "deps/lz4.h"
 
 uint32_t nextPowerOfTwo(uint32_t v) {
@@ -171,9 +171,6 @@ void PAKImage_GLUpload_RAW_RG88(PAKImage& bzImage, MTLTexture& texture) {
 
 // 0 => ARGB8888, 4 => DXT5, 6 => DXT3, 7 => DXT1, 8 => RG88, 9 => R8
 void PAKImage_GLUpload_DDS(PAKImage& bzImage, MTLTexture& texture, int type) {
-#ifdef __arm64__
-    assert(!"DDS is not supported on aarch64!");
-#endif
     uint64_t format = MTL::PixelFormatBC3_RGBA;
     int blockSize = 16;
     switch(type) {
@@ -189,7 +186,7 @@ void PAKImage_GLUpload_DDS(PAKImage& bzImage, MTLTexture& texture, int type) {
       break;
     };
 
-		auto size = ((bzImage.mips[0].width+3)/4)  * blockSize;
+    auto size = ((bzImage.mips[0].width+3)/4)  * blockSize;
     
     texture.create(bzImage.width, bzImage.height, format, MTL::TextureType2D, MTL::StorageModeManaged, MTL::TextureUsageShaderRead);
     texture.uploadDirect(size, (uint8_t*)bzImage.mips[0].data);
