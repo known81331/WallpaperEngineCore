@@ -26,9 +26,5 @@
 
 void Wallpaper64SteamUI();
 
-inline std::string Wallpaper64GetStorageDir() {
-    return std::string(getenv("HOME")) + "/.wallpaperio/";
-}
-
 
 #endif /* wallpaper64_h */

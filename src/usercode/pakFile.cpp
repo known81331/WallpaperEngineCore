@@ -6,7 +6,7 @@
 //  Copyright © 2025 Apple. All rights reserved.
 //
 
-#include "wallpaper64.h"
+#include "pak.h"
 #include <cstdlib>
 #include <cstdio>
 #include <sys/types.h>

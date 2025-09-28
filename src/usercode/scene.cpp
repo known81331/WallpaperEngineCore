@@ -228,7 +228,21 @@ ImVec2 recurseModelScale(Model* mdl) {
     return scale;
 }
 
-void Scene::init(const std::string& path) {
+void Scene::init(const Scene::Desc& desc) {
+    destroy();
+    
+    switch(desc.type) {
+        case 0:
+            PAKFile_LoadAndDecompress( (std::string(desc.folderPath) + "/scene.pkg").data());
+            initForPkg((Wallpaper64GetStorageDir() + "tmp_scene").data());
+            break;
+        case 1:
+            initForVideo(desc.folderPath + "/" + desc.file);
+            break;
+    }
+}
+
+void Scene::initForPkg(const std::string& path) {
 
     sceneRootPath = path + "/";
 

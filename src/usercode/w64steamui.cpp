@@ -10,6 +10,7 @@
 #include "scene.hpp"
 
 #include "steam_api.h"
+#include "deps/simdjson.h"
 
 int _steamStatus = 0;
 bool _gSteamInit = false;
@@ -26,6 +27,7 @@ struct SteamUIDownloaded_t {
     char folderPath[1024];
     uint32 timestamp = 0;
     PublishedFileId_t id;
+    Scene::Desc desc;
 };
 
 struct SteamUIState_t {
@@ -104,6 +106,33 @@ public:
     
 };
 
+void SteamUI_ParseItemInfo(Scene::Desc& desc) {
+    simdjson::dom::parser parser;
+    simdjson::dom::element root = parser.load(desc.folderPath + "/project.json");
+    
+    std::string type = "scene";
+    if (root["type"].is_string())
+        type = root["type"].get_c_str().value();
+    
+    if (type == "scene" || type == "Scene") {
+        desc.type = 0;
+    }
+    else if (type == "video") {
+        desc.type = 1;
+    }
+    else {
+        desc.type = -1;
+        puts("unsupported type!");
+    }
+    
+    if (root["file"].is_string())
+        desc.file = root["file"].get_c_str().value();
+    
+    if (root["title"].is_string())
+        desc.title = root["title"].get_c_str().value();
+    
+}
+
 std::vector<CSteamUI_Handler*> _handlergcList;
 
 class CSteamUI_Static_Handler {
@@ -135,6 +164,9 @@ void CSteamUI_Static_Handler::SteamUI_OnItemDownloadComplete(DownloadItemResult_
     );
 
     details.id = pCallback->m_nPublishedFileId;
+    
+    details.desc.folderPath = details.folderPath;
+    SteamUI_ParseItemInfo(details.desc);
     
     if (ok) {
         printf("Item installed at: %s (size: %llu bytes)\n", details.folderPath, details.sizeOnDisk);
@@ -277,20 +309,14 @@ void SteamUI_DrawCell_local(SteamUIDownloaded_t& detail) {
         
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0,0));
         if ( ImGui::ImageButton(" ", (ImTextureID)tex._pTexture, ImVec2(_steamUIState.iconsize,_steamUIState.iconsize), ImVec2(0,0), ImVec2(1,1), col, col ) ) {
-           // PAKFile_LoadAndDecompress( (std::string(detail.folderPath) + "/scene.pkg").data());
-          //  scene.destroy();
-         //   scene.init((Wallpaper64GetStorageDir() + "tmp_scene").data());
-            
-            
-            scene.destroy();
-            scene.initForVideo((std::string(detail.folderPath) + "/大 东 北.mp4").data());
+            scene.init(detail.desc);
         }
         ImGui::PopStyleVar();
         
         ImVec2 cursorPos = ImGui::GetCursorPos();
         
         ImGui::SetCursorPos(ImVec2((_steamUIState.iconsize/2)-ImGui::CalcTextSize("99999999").x/2,cursorPos.y-50));
-        ImGui::Text("%lld", detail.id);
+        ImGui::Text("%s", detail.desc.title.data());
     }
     else
         ImGui::Text("Item missing/corrupted!\n%lld", detail.id);
@@ -310,6 +336,9 @@ void SteamUI_PopulateLocalList() {
         downloaded.id = id;
      //   if (!std::filesystem::exists((std::string(downloaded.folderPath) + "/scene.pkg")))
      //       break;
+        downloaded.desc.folderPath = downloaded.folderPath;
+        SteamUI_ParseItemInfo(downloaded.desc);
+        
         downloadedItems[id] = downloaded;
     }
     

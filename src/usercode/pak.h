@@ -85,4 +85,9 @@ void PAKImage_GLUpload(PAKImage& bzImage, MTLTexture& texture);
 int PAKFile_LoadAndDecompress(const char *filename);
 
 
+inline std::string Wallpaper64GetStorageDir() {
+    return std::string(getenv("HOME")) + "/.wallpaperio/";
+}
+
+
 #endif /* pak_h */

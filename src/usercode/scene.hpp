@@ -113,7 +113,17 @@ struct Model {
 
 class Scene {
 public:
-    void init(const std::string& path);
+    struct Desc {
+        int type = 0;
+        std::string file;
+        std::string folderPath;
+        
+        std::string title;
+        uint64_t id;
+    };
+    
+    void init(const Desc& desc);
+    void initForPkg(const std::string& path);
     void initForVideo(const std::string& path);
     void initForWeb(const std::string& path);
     void update();
@@ -131,5 +141,6 @@ public:
     std::string sceneRootPath;
 
 };
+
 
 #endif /* scene_hpp */
