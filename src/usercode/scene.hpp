@@ -86,7 +86,10 @@ private:
     AVCodecContext* codec_ctx = nullptr;
     AVFrame* frame, *frame2;
     int video_stream_idx = -1;
-    uint64_t ot = 0;
+    
+    double frame_duration_sec = 0.0;
+    double time_accumulator = 0.0;
+    long long last_update_time_ms = 0;
 };
 
 struct Model {

@@ -283,7 +283,7 @@ void SteamUI_DrawCell_local(SteamUIDownloaded_t& detail) {
             
             
             scene.destroy();
-            scene.initForVideo((std::string(detail.folderPath) + "/Cast n Chill 2 fade.mp4").data());
+            scene.initForVideo((std::string(detail.folderPath) + "/大 东 北.mp4").data());
         }
         ImGui::PopStyleVar();
         
