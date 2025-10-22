@@ -36,7 +36,7 @@ void apphide_togglehide(GLFWwindow *wnd, bool state = true) {
 
 void apphide(GLFWwindow* wnd, void* metalDevice) {
 
-  //  apphide_togglehide(wnd);
+    //apphide_togglehide(wnd);
     
     int width, height;
     glfwGetFramebufferSize(wnd, &width, &height);
