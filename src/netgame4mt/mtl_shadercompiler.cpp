@@ -66,7 +66,7 @@ void RenderEngine::createShaders() {
               
                   half3 gblur( float2 uv, texture2d< half, access::sample > tex, float blur = 1.0 )
                   {
-                      constexpr sampler s( address::repeat, filter::linear );
+                      constexpr sampler s( address::mirrored_repeat, filter::linear );
                       float Pi = 6.28318530718; // Pi*2
                       
                       // GAUSSIAN BLUR SETTINGS {{{
@@ -116,16 +116,19 @@ void RenderEngine::createShaders() {
                       sub = mix(0.f, sub, abs(f) );
                       
                       half3 texel1 = gblur(texcoord_r + sub* (fmod(0.56f-f, 0.6f)) , tex, blur);
-                      half3 texel2 = gblur(texcoord_r + sub * ( 2.44f-(f+f) ) * (scale * 0.5f) * 0.098f, tex, blur);
+                      half3 texel2 = gblur(texcoord_r + sub * ( 2.44f-(f+f) ) * (float2(14.f, 14.f) * res) * 0.098f, tex, blur);
                       half3 texel3 = gblur( texcoord_r + sub * (0.55f - f) * 0.18f * scale, tex, blur);
                       half3 texel4 = gblur(texcoord_r + sub * (0.5f - f) * 0.8f * scale, tex, blur);
                       
                       half3 texel = (f > 0.58f) ? texel2 : texel3;// * half3(color.xyz);
-                      texel += texel1 * saturate((f - 0.47) / 0.23) * max(texel1, texel);
-                      texel = mix(texel3, texel, saturate((f - 0.39) / 0.35)) * max(texel4, half3(0.9));
+                      texel = min(texel, texel + texel1 * saturate((f - 0.47) / 0.23) * max(texel1, texel) );
+                      texel = mix(texel3, texel, saturate((f - 0.39) / 0.35)) * max(texel4, half3(0.89f));
+                      texel = mix( gblur(texcoord_r, tex, blur) * 0.89f, texel, f * 1.528f);
+              
                       texel *= mix(half3(1.f), half3(color.xyz), 1.f-color.w);
                       
-                      texel += half3(color.xyz) * max(min(0.7f, ( 0.26f - f) ), 0.4f) * 0.66f * color.w;
+                      texel += half3(color.xyz) * max(min(0.7f, ( 0.26f - f) ), 0.4f) * 0.26f * color.w;
+              
                           
                       return half4(texel, 1.f);
                   }
@@ -137,7 +140,7 @@ void RenderEngine::createShaders() {
                       texture2d< half, access::sample > tex [[texture(0)]] )
                   {
                               
-                      constexpr sampler s( address::repeat, filter::linear );
+                      constexpr sampler s( address::mirrored_repeat, filter::linear );
               
                       float2 uv = in.position.xy * instanceData.rtSize;
               

@@ -23,7 +23,6 @@
 #include "../netgame4mt/RenderEngine.hpp"
 
 
-
 void Wallpaper64SteamUI();
 
 

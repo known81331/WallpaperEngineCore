@@ -1,2 +1,2 @@
-#include "scene.hpp"
-s
+
+#include "CScene.hpp"

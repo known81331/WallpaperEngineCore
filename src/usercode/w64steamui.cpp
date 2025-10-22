@@ -1,13 +1,6 @@
-//
-//  w64steamui.cpp
-//  wallpaper64
-//
-//  Created by apple on 2025-08-30.
-//  Copyright © 2025 Apple. All rights reserved.
-//
 
 #include "wallpaper64.h"
-#include "scene.hpp"
+#include "CScene.hpp"
 
 #include "steam_api.h"
 #include "deps/simdjson.h"
@@ -107,6 +100,9 @@ public:
 };
 
 void SteamUI_ParseItemInfo(Scene::Desc& desc) {
+    if (!std::filesystem::exists(desc.folderPath + "/project.json"))
+        return;
+    
     simdjson::dom::parser parser;
     simdjson::dom::element root = parser.load(desc.folderPath + "/project.json");
     
@@ -187,6 +183,7 @@ void SteamUI_Init() {
         puts( "SteamAPI_Init() failed: " );
         puts( errMsg );
         _steamStatus = 1;
+        return;
     }
 
     _gSteamInit = true;
@@ -379,7 +376,7 @@ void SteamUI_Hotbar() {
         "NotYetRated"
     };
     
-    static const char * current_item = items[0];
+    static const char * current_item = items[2];
     
     if (ImGui::Button("o"))
         SteamUI_RefreshWorkshopList(_steamUIQuery.queryType, _steamUIQuery.page, _steamUIQuery.search);
@@ -463,47 +460,51 @@ void SteamUI_Hotbar() {
 //  it is impossible to interact with things behind explorer/finder for win32/osx
 void Wallpaper64SteamUI() {
     
-    if (!_gSteamInit) {
+    if (!_gSteamInit && _steamStatus == 0) {
         SteamUI_Init();
-        SteamUI_PopulateLocalList();
+        if (_gSteamInit)
+            SteamUI_PopulateLocalList();
+        //scene.initForVideo("/Users/apple/Library/Application Support/Steam/steamapps/workshop/content/431960/3038952051/MEC music 4k.mp4");
     }
     
-    
-    SteamAPI_RunCallbacks();
-    
-    ImGui::Begin("WallpaperUI", 0,  ImGuiWindowFlags_NoBringToFrontOnFocus);
-    
-    if ( ImGui::Button("Local") )
-        _steamUIState.page = 0;
-    ImGui::SameLine();
-    if ( ImGui::Button("Workshop") )
-        _steamUIState.page = 1;
-    
-    ImGui::SameLine();
-    
-    if ( ImGui::Button("Unsubscribe all") ) {
-        for (auto& i : downloadedItems) {
-            SteamUGC()->UnsubscribeItem(i.first);
+    if (_steamStatus == 0) {
+        
+        SteamAPI_RunCallbacks();
+        
+        ImGui::Begin("WallpaperUI", 0,  ImGuiWindowFlags_NoBringToFrontOnFocus);
+        
+        if ( ImGui::Button("Local") )
+            _steamUIState.page = 0;
+        ImGui::SameLine();
+        if ( ImGui::Button("Workshop") )
+            _steamUIState.page = 1;
+        
+        ImGui::SameLine();
+        
+        if ( ImGui::Button("Unsubscribe all") ) {
+            for (auto& i : downloadedItems) {
+                SteamUGC()->UnsubscribeItem(i.first);
+            }
         }
+        
+        
+        SteamUI_Hotbar() ;
+        
+        
+        ImGui::BeginChild("List");
+        
+        switch (_steamUIState.page) {
+            case 0:
+                SteamUI_LocalList();
+                break;
+            case 1:
+                SteamUI_WorkshopList();
+                break;
+        }
+        
+        ImGui::EndChild();
+        
+        ImGui::End();
     }
-    
-    
-    SteamUI_Hotbar() ;
-    
-    
-    ImGui::BeginChild("List");
-    
-    switch (_steamUIState.page) {
-        case 0:
-            SteamUI_LocalList();
-            break;
-        case 1:
-            SteamUI_WorkshopList();
-            break;
-    }
-    
-    ImGui::EndChild();
-
-    ImGui::End();
 }
 

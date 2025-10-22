@@ -34,42 +34,28 @@ MTLTexture TextureLoader::createUncompressedTexture(const std::string &filePath,
     auto rpath = GetBundleFilePath(filePath);
 
         fif = FreeImage_GetFileType(filePath.c_str(), 0);
-        //if still unknown, try to guess the file format from the file extension
         if (fif == FIF_UNKNOWN)
             fif = FreeImage_GetFIFFromFilename(filePath.c_str());
-        //if still unkown, return failure
+    
         if (fif == FIF_UNKNOWN) {
-         //   CONSOLE.PrintText(logManager::kLogError, "Invalid texture format: %s", filePath.c_str());
             fif = FIF_TARGA;
             return {};
         }
 
-        //check that the plugin has reading capabilities and load the file
         if (FreeImage_FIFSupportsReading(fif))
             image = FreeImage_Load(fif, rpath.c_str());
-      //  else
-       //     CONSOLE.PrintText(logManager::kLogError, "Unsupported texture type: %s", filePath.c_str());
-        //if the image failed to load, return failure
+    
         if (!image) {
-        //    CONSOLE.PrintText(logManager::kLogError, "Failed to load texture: %s", filePath.c_str());
-            //FreeImage_Unload(*image);
             return {};
         }
     
-     //   image = FreeImage_Rescale(image, 256, 256);
-
-      //  if(isFlipped)
             FreeImage_FlipVertical(image);
 
-        //if (filePath == "rendercommon/lighting/fog_colormap.tga") {
-        //    //FreeImage_Invert(*image);
-        //    FreeImage_FlipVertical(*image);
-        //}
 
         bpp = FreeImage_GetBPP(image);
         width = FreeImage_GetWidth(image);
         height = FreeImage_GetHeight(image);
-        //if this somehow one of these failed (they shouldn't), return failure
+    
         if ((bpp == 0) || (width == 0) || (height == 0)) {
             FreeImage_Unload(image);
             return {};
@@ -103,10 +89,7 @@ MTLTexture TextureLoader::createUncompressedTexture(const std::string &filePath,
             break;
         default:
         {
-            //we could try to handle some weird bitcount, but these will probably be HDR or some antique format, just exit instead..
             format = MTL::PixelFormatRGBA8Unorm;
-      //      CONSOLE.PrintText(logManager::kLogWarning, "Unsupported bits per pixel (%ud) for texture: %s", bpp, filePath.c_str());
-            //    return mTexture;
         }
         break;
         }

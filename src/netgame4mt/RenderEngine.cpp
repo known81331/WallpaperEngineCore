@@ -19,7 +19,6 @@ void RenderEngine::init() {
     createFramebuffers();
     createDepthStencils();
     
-    camera.create();
     
 }
 
@@ -81,5 +80,4 @@ void RenderEngine::destroyFramebuffers() {
 
 void RenderEngine::destroy() {
     destroyFramebuffers();
-    camera.destroy();
 }

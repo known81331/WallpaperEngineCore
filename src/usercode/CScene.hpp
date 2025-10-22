@@ -11,7 +11,7 @@
 #include <vector>
 #include <unordered_map>
 
-#include "pak.h"
+#include "PAK.h"
 #include "Material.hpp"
 
 class Layer {

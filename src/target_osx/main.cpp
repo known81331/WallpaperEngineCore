@@ -1,5 +1,4 @@
 #include "../netgame4mt/RenderEngine.hpp"
-#include "../netgame4mt/NetGameWorkspace.hpp"
 
 #define GLFW_INCLUDE_NONE
 #define GLFW_EXPOSE_NATIVE_COCOA
@@ -13,6 +12,12 @@ GLFWwindow* window = nullptr;
 void apphide(GLFWwindow* wnd, void* metalDevice) ;
 
 std::string GetBundleFilePath(const std::string& filename);
+
+
+void ____test_Tahoe_clearframe() {
+    glfwPollEvents();
+    ImGui_ImplGlfw_NewFrame();
+}
 
 int main( int argc, char* argv[] )
 {
@@ -41,7 +46,7 @@ int main( int argc, char* argv[] )
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     //ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("cn.ttf").data(), 16.f, nullptr, ImGui::GetIO().Fonts->GetGlyphRangesChineseSimplifiedCommon());
     ImGui::GetIO().Fonts->AddFontFromFileTTF("/System/Library/Fonts/PingFang.ttc", 16.f);
-    //ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("helvetica.ttc").data(), 24.f);
+   // ImGui::GetIO().Fonts->AddFontFromFileTTF(GetBundleFilePath("helvetica.ttc").data(), 16.f);
 
     void tahoe_create(MTL::Device*);
     tahoe_create(_pDevice);
@@ -52,7 +57,6 @@ int main( int argc, char* argv[] )
         
         glfwPollEvents();
         ImGui_ImplGlfw_NewFrame();
-        RenderEngine::singleton()->camera.update();
         RenderEngine::singleton()->frame();
     }
     

@@ -1,4 +1,5 @@
-#include "scene.hpp"
+
+#include "CScene.hpp"
 #include <random>
 
 int randomInt(int min, int max) {

@@ -59,10 +59,7 @@ void MTLRenderer::renderTahoePipeline(MTL::CommandBuffer* pCmd, CA::MetalDrawabl
     
    // ImGui_ImplMetal_RenderDrawData(ImGui::GetDrawData(), pCmd, pEnc);
     
-    
-    
     pEnc->drawPrimitives( MTL::PrimitiveType::PrimitiveTypeTriangle, NS::UInteger(0), NS::UInteger(6) );
-    
     
   
     pEnc->endEncoding();
@@ -82,17 +79,28 @@ void MTLRenderer::renderCompositionPipeline(MTL::CommandBuffer* pCmd) {
     
     
     
-    ImGui_ImplMetal_NewFrame(pRpd);
     
+    
+    ImGui_ImplMetal_NewFrame(pRpd);
     ImGui::NewFrame();
     
     
     void NetGameImguiWindow();
     NetGameImguiWindow();
     
-    ImGui::Render();
     
+    ImGui::Render();
     ImGui_ImplMetal_RenderDrawData(ImGui::GetDrawData(), pCmd, pEnc);
+    
+    
+   // ImGui_ImplMetal_NewFrame(pRpd);
+   // ImGui::NewFrame();
+    
+  // void NetGameImguiWindow();
+   // NetGameImguiWindow();
+    
+  //  ImGui::Render();
+  //  ImGui_ImplMetal_RenderDrawData(ImGui::GetDrawData(), pCmd, pEnc);
     
     
   

@@ -1,13 +1,9 @@
-//
-//  Contraption.h
-//  wallpaper64mt
-//
-//  Created by apple on 2025-10-21.
-//  Copyright © 2025 Apple. All rights reserved.
-//
+#pragma once
 
-#ifndef Contraption_h
-#define Contraption_h
-
-
-#endif /* Contraption_h */
+class Contraption {
+public:
+    void start();
+    void update();
+    void destroy();
+    
+};

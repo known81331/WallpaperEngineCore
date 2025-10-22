@@ -6,7 +6,6 @@
 //  Copyright © 2025 Apple. All rights reserved.
 //
 #include "netgame4mt/RenderEngine.hpp"
-#include "netgame4mt/NetGameWorkspace.hpp"
 
 
 struct glass_t {
@@ -96,11 +95,13 @@ void tahoe_create(MTL::Device *_pDevice) {
     pFragmentGlassBuffer = _pDevice->newBuffer( sizeof(glass_buffer_t), MTL::ResourceStorageModeShared );
     RenderEngine::singleton()->buffers["uiglass"]._pBuffer = pFragmentGlassBuffer;
     {
-        glasses.glassCount = 2;
-        glasses.glasses[0].size = 0.018f;
-        glasses.glasses[0].blur = -50.f;
-        glasses.glasses[0].realblur = 16.f;
-        glasses.glasses[0].col = {1.f,1.f,1.f, 1.f};
+        glasses.glassCount = 1;
+        glasses.glasses[0].size = 0.017f;
+        glasses.glasses[0].blur = -32.f;
+        glasses.glasses[0].realblur = 10.f;
+        glasses.glasses[0].col = {1.f,1.f,1.f, 1.3f};
+        glasses.glasses[0].realsize = {2.5, -0.035};
+        glasses.glasses[0].pos = {-1.2, 1.0};
         glasses.glasses[1] = glasses.glasses[0];
         glasses.glasses[2] = glasses.glasses[0];
         glasses.glasses[3] = glasses.glasses[0];

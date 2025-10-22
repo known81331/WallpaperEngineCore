@@ -17,7 +17,7 @@ void MTLShader::create(const std::string& code, const std::string& entryVS, cons
     
     auto NSCode = NS::String::string(code.data(), NS::UTF8StringEncoding);
     
-    if (code.size() < 48) {
+    if (code.size() < 96) {
         std::string rpath = GetBundleFilePath(code);
         std::ifstream str(rpath.data());
         

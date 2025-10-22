@@ -1,6 +1,7 @@
 #include "deps/simdjson.h"
+#include "deps/xxhash.h"
 #include "TextureLoader.hpp"
-#include "scene.hpp"
+#include "CScene.hpp"
 
 std::string GetBundleFilePath(const std::string& filename);
 
@@ -35,7 +36,7 @@ void Scene::parseMaterial(Material& mat, const std::string& path) {
                         mat.texHeight = img.texHeight;
                         
                         if (img.fiFormat == FIF_MP4) {
-                            
+                            (new MatVideoComponent(mat))->init(img);
                         }
                         else
                             PAKImage_GLUpload(img, *mat.texture);
@@ -44,6 +45,9 @@ void Scene::parseMaterial(Material& mat, const std::string& path) {
                     }
                     else
                         *mat.texture = TextureLoader::createUncompressedTexture("7jx.png");
+                    
+                    materials[XXH3_64bits(img.name.data(), img.name.length())] = &mat;
+                    
                 }
             }
 
@@ -417,6 +421,11 @@ void Scene::initForPicture(const std::string& path) {
     
 
 void Scene::update() {
+    for (auto& i : materials) {
+        for (auto* j : i.second->components) {
+            j->update();
+        }
+    }
     for (auto& i : models) {
         if (i->layer) {
             i->layer->update();
@@ -439,4 +448,5 @@ void Scene::destroy() {
     }
     models.clear();
     modelsById.clear();
+    materials.clear();
 }
