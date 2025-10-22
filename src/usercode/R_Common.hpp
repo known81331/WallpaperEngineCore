@@ -4,7 +4,7 @@
 #include <vector>
 #include "mtl_renderer.h"
 
-enum R_BlendMode : uint32_t {
+enum EBlendMode : uint32_t {
     kBlendModeDisabled,
     kBlendModeNormal = 0,
     kBlendModeAdditive,
@@ -17,6 +17,8 @@ struct CMDPassData {
 
 struct CMDPipelineData {
 // vertex, index, uniform
+    MTLBuffer vtxBuffer;
+    MTLBuffer idxBuffer;
 };
 
 struct CMDInstanceData {
@@ -24,6 +26,13 @@ struct CMDInstanceData {
 };
 
 class REND_CommandList {
+public:
+    void setDepthEnabled(bool);
+    void setBlendMode(EBlendMode);
+    void setShader();
+    void addQuad();
+    void addModel();
+private:
     
 };
 
@@ -73,7 +82,12 @@ private:
 
 
 class REND_MetalPresenter {
+public:
+    void init(MTLRenderer& rend);
+    void present();
     
+private:
+    MTLRenderer *_pRend;
 };
 
 class REND_GLPresenter {
