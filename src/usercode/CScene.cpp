@@ -184,23 +184,23 @@ void Scene::parseParticle(ParticleLayer* render, const std::string& path) {
             if (object["name"].is_string()) {
                 std::string name = object["name"].get_c_str().value();
                 if (name == "velocityrandom") {
-                    auto min = object["min"].get_c_str().value();
+                    auto sz = object["min"].is_string() ? object["min"].get_c_str().value() : "1.0 1.0";
                     char* end;
                     
-                    render->velocityMinX = (int)std::strtol(min, &end, 10);
+                    render->velocityMinX = (int)std::strtol(sz, &end, 10);
                     render->velocityMinY = (int)std::strtol(end, &end, 10);
                   //  auto z = std::strtol(end, nullptr, 10);
                     
-                    min = object["max"].get_c_str().value();
+                    sz = object["max"].is_string() ? object["max"].get_c_str().value() : "1.0 1.0";
                     
-                    render->velocityMaxX = (int)std::strtol(min, &end, 10);
+                    render->velocityMaxX = (int)std::strtol(sz, &end, 10);
                     render->velocityMaxY = (int)std::strtol(end, &end, 10);
                   //  z = std::strtol(end, nullptr, 10);
                     
                 }
                 else if (name == "sizerandom") {
-                    render->sizeMin = (int)object["min"].get_uint64().value();
-                    render->sizeMax = (int)object["max"].get_uint64().value();
+                    render->sizeMin = object["min"].is_uint64() ? (int)object["min"].get_uint64().value() : 1;
+                    render->sizeMax = object["max"].is_uint64() ? (int)object["max"].get_uint64().value() : 1;
                 }
             }
         }

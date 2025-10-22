@@ -47,6 +47,12 @@
 		187744432E52A8A400D6193E /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A9C07527349D4200932563 /* Metal.framework */; };
 		187744442E52A8A400D6193E /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71A9C07727349D4500932563 /* MetalKit.framework */; };
 		187744452E52A8A400D6193E /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1819BC602E216CA500001758 /* IOKit.framework */; };
+		1889097B2EA85BD700C4ADDA /* Model.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188909792EA85BD700C4ADDA /* Model.cpp */; };
+		1889097D2EA85CFA00C4ADDA /* CSoundLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1889097C2EA85CFA00C4ADDA /* CSoundLayer.cpp */; };
+		1889097F2EA85D1400C4ADDA /* CLightLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1889097E2EA85D1400C4ADDA /* CLightLayer.cpp */; };
+		18890D272EA930A600C4ADDA /* spirv_reflect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18890AC02EA930A400C4ADDA /* spirv_reflect.cpp */; };
+		18890D2B2EA930A600C4ADDA /* output_stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18890AC52EA930A400C4ADDA /* output_stream.cpp */; };
+		18890E112EA9310C00C4ADDA /* steam_appid.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16EF2E82463800EF1EE5 /* steam_appid.txt */; };
 		188E4B3D2E6276E500DDF480 /* CParticleLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188E4B3C2E6276E500DDF480 /* CParticleLayer.cpp */; };
 		188E4B3F2E62A73800DDF480 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 188E4B3E2E62A73800DDF480 /* assets */; };
 		188E4B842E62C22F00DDF480 /* libfreeimage.3.18.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 187760712E598B670066A9AA /* libfreeimage.3.18.0.dylib */; };
@@ -98,10 +104,7 @@
 		18E107542E60FF1F003CEAD2 /* simdjson.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107522E60FF1F003CEAD2 /* simdjson.cpp */; };
 		18E107572E610257003CEAD2 /* wallpaper64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E107562E610257003CEAD2 /* wallpaper64.cpp */; };
 		18E1090C2E610EC4003CEAD2 /* CScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E1090A2E610EC4003CEAD2 /* CScene.cpp */; };
-		18ED16F02E82463800EF1EE5 /* steam_appid.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16EF2E82463800EF1EE5 /* steam_appid.txt */; };
-		18ED16FD2E82E59500EF1EE5 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 18ED16FC2E82E59500EF1EE5 /* .gitkeep */; };
 		18F3A35E2E82428A002BF418 /* libsteam_api.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F3A35D2E82428A002BF418 /* libsteam_api.dylib */; };
-		18F3A3E32E8242E7002BF418 /* steam_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 18F3A3A92E8242E7002BF418 /* steam_api.json */; };
 		18F3A3E42E8242E7002BF418 /* libsdkencryptedappticket.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F3A3C82E8242E7002BF418 /* libsdkencryptedappticket.dylib */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +159,28 @@
 		184D5B1B2E5BB76300072534 /* libfreeimage.3.18.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreeimage.3.18.0.dylib; path = ../../../../../../opt/local/lib/libfreeimage.3.18.0.dylib; sourceTree = "<group>"; };
 		184D5B202E5BB78000072534 /* libfreeimage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreeimage.a; path = ../../../../../../opt/local/lib/libfreeimage.a; sourceTree = "<group>"; };
 		187760712E598B670066A9AA /* libfreeimage.3.18.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreeimage.3.18.0.dylib; path = ../../../../../../usr/local/Cellar/freeimage/3.18.0/lib/libfreeimage.3.18.0.dylib; sourceTree = "<group>"; };
+		188909792EA85BD700C4ADDA /* Model.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Model.cpp; sourceTree = "<group>"; };
+		1889097A2EA85BD700C4ADDA /* Model.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Model.hpp; sourceTree = "<group>"; };
+		1889097C2EA85CFA00C4ADDA /* CSoundLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSoundLayer.cpp; sourceTree = "<group>"; };
+		1889097E2EA85D1400C4ADDA /* CLightLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CLightLayer.cpp; sourceTree = "<group>"; };
+		188909812EA930A400C4ADDA /* .git-blame-ignore-revs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".git-blame-ignore-revs"; sourceTree = "<group>"; };
+		188909822EA930A400C4ADDA /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
+		188909832EA930A400C4ADDA /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		188909872EA930A400C4ADDA /* spirv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spirv.h; sourceTree = "<group>"; };
+		188909882EA930A400C4ADDA /* spirv_reflect.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = spirv_reflect.c; sourceTree = "<group>"; };
+		18890AC02EA930A400C4ADDA /* spirv_reflect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spirv_reflect.cpp; sourceTree = "<group>"; };
+		18890AC12EA930A400C4ADDA /* .gitmodules */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
+		18890AC22EA930A400C4ADDA /* CODE_OF_CONDUCT.adoc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CODE_OF_CONDUCT.adoc; sourceTree = "<group>"; };
+		18890AC32EA930A400C4ADDA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		18890AC52EA930A400C4ADDA /* output_stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output_stream.cpp; sourceTree = "<group>"; };
+		18890AC62EA930A400C4ADDA /* output_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = output_stream.h; sourceTree = "<group>"; };
+		18890BEE2EA930A500C4ADDA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		18890BFD2EA930A500C4ADDA /* .clang-format */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ".clang-format"; sourceTree = "<group>"; };
+		18890C002EA930A500C4ADDA /* windows-cmake-build.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "windows-cmake-build.yml"; sourceTree = "<group>"; };
+		18890C012EA930A500C4ADDA /* check-formatting.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "check-formatting.yml"; sourceTree = "<group>"; };
+		18890C022EA930A500C4ADDA /* linux-cmake-build.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = "linux-cmake-build.yml"; sourceTree = "<group>"; };
+		18890C032EA930A500C4ADDA /* spirv_reflect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spirv_reflect.h; sourceTree = "<group>"; };
+		18890C052EA930A500C4ADDA /* SECURITY.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = SECURITY.md; sourceTree = "<group>"; };
 		188E4B3C2E6276E500DDF480 /* CParticleLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CParticleLayer.cpp; sourceTree = "<group>"; };
 		188E4B3E2E62A73800DDF480 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		188E4B862E62C62700DDF480 /* w64steamui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = w64steamui.cpp; sourceTree = "<group>"; };
@@ -327,11 +352,15 @@
 				18B99CD52EA72D6500E33C0A /* Material.hpp */,
 				18B99CD42EA72D6500E33C0A /* Material.cpp */,
 				18B99CDB2EA828F200E33C0A /* MaterialComponent.cpp */,
+				188909792EA85BD700C4ADDA /* Model.cpp */,
+				1889097A2EA85BD700C4ADDA /* Model.hpp */,
 				18E1090B2E610EC4003CEAD2 /* CScene.hpp */,
 				18E1090A2E610EC4003CEAD2 /* CScene.cpp */,
 				18B99CD92EA72FA000E33C0A /* CImageLayer.cpp */,
 				188E4B3C2E6276E500DDF480 /* CParticleLayer.cpp */,
 				18B99CDF2EA82E4C00E33C0A /* CTextLayer.cpp */,
+				1889097C2EA85CFA00C4ADDA /* CSoundLayer.cpp */,
+				1889097E2EA85D1400C4ADDA /* CLightLayer.cpp */,
 			);
 			name = scene;
 			sourceTree = "<group>";
@@ -357,6 +386,79 @@
 				18B99CD22EA72BFE00E33C0A /* PAKMdl.cpp */,
 			);
 			name = pak;
+			sourceTree = "<group>";
+		};
+		188909802EA930A400C4ADDA /* SPIRV-Reflect */ = {
+			isa = PBXGroup;
+			children = (
+				188909812EA930A400C4ADDA /* .git-blame-ignore-revs */,
+				188909822EA930A400C4ADDA /* CMakeLists.txt */,
+				188909832EA930A400C4ADDA /* LICENSE */,
+				188909842EA930A400C4ADDA /* include */,
+				188909882EA930A400C4ADDA /* spirv_reflect.c */,
+				18890AC02EA930A400C4ADDA /* spirv_reflect.cpp */,
+				18890AC12EA930A400C4ADDA /* .gitmodules */,
+				18890AC22EA930A400C4ADDA /* CODE_OF_CONDUCT.adoc */,
+				18890AC32EA930A400C4ADDA /* README.md */,
+				18890AC42EA930A400C4ADDA /* common */,
+				18890BEE2EA930A500C4ADDA /* .gitignore */,
+				18890BFD2EA930A500C4ADDA /* .clang-format */,
+				18890BFE2EA930A500C4ADDA /* .github */,
+				18890C032EA930A500C4ADDA /* spirv_reflect.h */,
+				18890C052EA930A500C4ADDA /* SECURITY.md */,
+			);
+			path = "SPIRV-Reflect";
+			sourceTree = "<group>";
+		};
+		188909842EA930A400C4ADDA /* include */ = {
+			isa = PBXGroup;
+			children = (
+				188909852EA930A400C4ADDA /* spirv */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		188909852EA930A400C4ADDA /* spirv */ = {
+			isa = PBXGroup;
+			children = (
+				188909862EA930A400C4ADDA /* unified1 */,
+			);
+			path = spirv;
+			sourceTree = "<group>";
+		};
+		188909862EA930A400C4ADDA /* unified1 */ = {
+			isa = PBXGroup;
+			children = (
+				188909872EA930A400C4ADDA /* spirv.h */,
+			);
+			path = unified1;
+			sourceTree = "<group>";
+		};
+		18890AC42EA930A400C4ADDA /* common */ = {
+			isa = PBXGroup;
+			children = (
+				18890AC52EA930A400C4ADDA /* output_stream.cpp */,
+				18890AC62EA930A400C4ADDA /* output_stream.h */,
+			);
+			path = common;
+			sourceTree = "<group>";
+		};
+		18890BFE2EA930A500C4ADDA /* .github */ = {
+			isa = PBXGroup;
+			children = (
+				18890BFF2EA930A500C4ADDA /* workflows */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
+		18890BFF2EA930A500C4ADDA /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				18890C002EA930A500C4ADDA /* windows-cmake-build.yml */,
+				18890C012EA930A500C4ADDA /* check-formatting.yml */,
+				18890C022EA930A500C4ADDA /* linux-cmake-build.yml */,
+			);
+			path = workflows;
 			sourceTree = "<group>";
 		};
 		18B99CDE2EA82C9C00E33C0A /* presenters */ = {
@@ -448,6 +550,7 @@
 		18E1074E2E60FF1F003CEAD2 /* deps */ = {
 			isa = PBXGroup;
 			children = (
+				188909802EA930A400C4ADDA /* SPIRV-Reflect */,
 				18B99CE52EA8429900E33C0A /* xxhash.c */,
 				18B99CE62EA8429900E33C0A /* xxhash.h */,
 				18E1074F2E60FF1F003CEAD2 /* lz4.cpp */,
@@ -694,9 +797,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				188E4B3F2E62A73800DDF480 /* assets in Resources */,
-				18ED16FD2E82E59500EF1EE5 /* .gitkeep in Resources */,
-				18ED16F02E82463800EF1EE5 /* steam_appid.txt in Resources */,
-				18F3A3E32E8242E7002BF418 /* steam_api.json in Resources */,
+				18890E112EA9310C00C4ADDA /* steam_appid.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,16 +856,21 @@
 				18E107402E60FA3A003CEAD2 /* mtl_shader.cpp in Sources */,
 				18E107542E60FF1F003CEAD2 /* simdjson.cpp in Sources */,
 				18E107462E60FA3A003CEAD2 /* mtl_pipeline.cpp in Sources */,
+				1889097D2EA85CFA00C4ADDA /* CSoundLayer.cpp in Sources */,
 				18E107312E60FA3A003CEAD2 /* apphide.mm in Sources */,
+				18890D272EA930A600C4ADDA /* spirv_reflect.cpp in Sources */,
 				18B99CD82EA72E9D00E33C0A /* R_MetalPresenter.cpp in Sources */,
 				18E107472E60FA3A003CEAD2 /* main.cpp in Sources */,
+				18890D2B2EA930A600C4ADDA /* output_stream.cpp in Sources */,
 				18B99CE02EA82E4C00E33C0A /* CTextLayer.cpp in Sources */,
 				18B99CD32EA72BFE00E33C0A /* PAKMdl.cpp in Sources */,
 				18B99CDA2EA72FA000E33C0A /* CImageLayer.cpp in Sources */,
 				18B99CE22EA82F8E00E33C0A /* Contraption.cpp in Sources */,
 				188E4B872E62C62700DDF480 /* w64steamui.cpp in Sources */,
 				1825B9C32E9D5EB3007F74A5 /* PAKTex.cpp in Sources */,
+				1889097F2EA85D1400C4ADDA /* CLightLayer.cpp in Sources */,
 				18E107532E60FF1F003CEAD2 /* lz4.cpp in Sources */,
+				1889097B2EA85BD700C4ADDA /* Model.cpp in Sources */,
 				18B99CE72EA8429900E33C0A /* xxhash.c in Sources */,
 				180A71692E7F1E0E00A135EC /* tahoe_management.cpp in Sources */,
 				18C8858C2E84B8DD00637DBE /* imgui_tables.cpp in Sources */,
